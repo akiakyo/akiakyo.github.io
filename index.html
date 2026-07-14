@@ -1,0 +1,608 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>akiakyo — Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bg: #ffffff;
+    --fg: #000000;
+    --muted-2: rgba(0,0,0,0.2);
+    --muted-4: rgba(0,0,0,0.4);
+    --muted-5: rgba(0,0,0,0.5);
+    --muted-6: rgba(0,0,0,0.6);
+    --muted-7: rgba(0,0,0,0.7);
+    --border: rgba(0,0,0,0.08);
+    --border-strong: rgba(0,0,0,0.1);
+    --card-bg: rgba(0,0,0,0.015);
+    --card-hover-shadow: 0 8px 32px rgba(0,0,0,0.13), 0 0 0 1px rgba(0,0,0,0.07);
+    --icon-hover-shadow: drop-shadow(0 0 6px rgba(0,0,0,0.5));
+    --text-glow: 0 2px 8px rgba(0,0,0,0.13), 0 1px 2px rgba(0,0,0,0.10);
+    --text-glow-strong: 0 2px 12px rgba(0,0,0,0.18), 0 1px 3px rgba(0,0,0,0.12);
+    --section-glow: 0 2px 10px rgba(0,0,0,0.15), 0 1px 3px rgba(0,0,0,0.10);
+    --avatar-bg: #f8f8f8;
+    --toast-bg: #000000;
+    --toast-fg: #ffffff;
+  }
+
+  html[data-theme="dark"] {
+    --bg: #0a0a0a;
+    --fg: #f5f5f5;
+    --muted-2: rgba(255,255,255,0.25);
+    --muted-4: rgba(255,255,255,0.4);
+    --muted-5: rgba(255,255,255,0.5);
+    --muted-6: rgba(255,255,255,0.6);
+    --muted-7: rgba(255,255,255,0.7);
+    --border: rgba(255,255,255,0.1);
+    --border-strong: rgba(255,255,255,0.14);
+    --card-bg: rgba(255,255,255,0.03);
+    --card-hover-shadow: 0 8px 32px rgba(255,255,255,0.06), 0 0 0 1px rgba(255,255,255,0.1);
+    --icon-hover-shadow: drop-shadow(0 0 6px rgba(255,255,255,0.4));
+    --text-glow: 0 2px 8px rgba(255,255,255,0.10), 0 1px 2px rgba(255,255,255,0.08);
+    --text-glow-strong: 0 2px 12px rgba(255,255,255,0.14), 0 1px 3px rgba(255,255,255,0.10);
+    --section-glow: 0 2px 10px rgba(255,255,255,0.12), 0 1px 3px rgba(255,255,255,0.08);
+    --avatar-bg: #161616;
+    --toast-bg: #f5f5f5;
+    --toast-fg: #000000;
+  }
+
+  * {
+    box-sizing: border-box;
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--fg);
+    min-height: 100vh;
+    transition: background-color 0.4s ease, color 0.4s ease;
+  }
+
+  .wrap {
+    max-width: 56rem;
+    margin: 0 auto;
+    padding: 2.5rem 1rem;
+    position: relative;
+  }
+  @media (min-width: 640px) {
+    .wrap { padding: 4rem 1.5rem; }
+  }
+
+  /* ── theme toggle ── */
+  .theme-toggle {
+    position: fixed;
+    top: 1.25rem;
+    right: 1.25rem;
+    z-index: 50;
+    width: 3.25rem;
+    height: 1.75rem;
+    border-radius: 999px;
+    border: 1px solid var(--border-strong);
+    background: var(--card-bg);
+    cursor: pointer;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    transition: background-color 0.4s ease, border-color 0.4s ease;
+  }
+
+  .theme-toggle-knob {
+    width: 1.35rem;
+    height: 1.35rem;
+    border-radius: 999px;
+    background: var(--fg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--bg);
+    margin-left: 0.15rem;
+    transition: transform 0.45s cubic-bezier(.65,0,.35,1), background-color 0.4s ease, color 0.4s ease;
+  }
+  html[data-theme="dark"] .theme-toggle-knob {
+    transform: translateX(1.45rem);
+  }
+
+  .theme-toggle-knob svg {
+    width: 0.85rem;
+    height: 0.85rem;
+    transition: opacity 0.25s ease, transform 0.35s ease;
+  }
+  .icon-sun { position: absolute; opacity: 1; transform: scale(1) rotate(0deg); }
+  .icon-moon { position: absolute; opacity: 0; transform: scale(0.4) rotate(-60deg); }
+  html[data-theme="dark"] .icon-sun { opacity: 0; transform: scale(0.4) rotate(60deg); }
+  html[data-theme="dark"] .icon-moon { opacity: 1; transform: scale(1) rotate(0deg); }
+
+  /* ── keyframes ── */
+  @keyframes glitch-name {
+    0%   { text-shadow: 2px 0 rgba(127,127,127,0.28), -2px 0 rgba(127,127,127,0.15); }
+    20%  { text-shadow: -2px 0 rgba(127,127,127,0.32), 2px 0 rgba(127,127,127,0.12); }
+    40%  { text-shadow: 2px 2px rgba(127,127,127,0.30), -2px -2px rgba(127,127,127,0.18); }
+    60%  { text-shadow: -1px 0 rgba(127,127,127,0.35), 1px 0 rgba(127,127,127,0.15); }
+    80%  { text-shadow: 1px -1px rgba(127,127,127,0.28), -1px 1px rgba(127,127,127,0.22); }
+    100% { text-shadow: 2px 0 rgba(127,127,127,0.28), -2px 0 rgba(127,127,127,0.15); }
+  }
+  @keyframes blink-cursor {
+    0%, 100% { opacity: 1; }
+    50%       { opacity: 0; }
+  }
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeInLeft {
+    from { opacity: 0; transform: translateX(-24px); }
+    to   { opacity: 1; transform: translateX(0); }
+  }
+  @keyframes subtleFloat {
+    0%, 100% { transform: translateY(0px); }
+    50%       { transform: translateY(-4px); }
+  }
+  @keyframes toastIn {
+    from { opacity: 0; transform: translateY(6px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .animated-name {
+    display: inline-block;
+    animation: glitch-name 3s ease-in-out infinite;
+    font-size: 1.25rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1;
+    margin-bottom: 0.25rem;
+    min-height: 1.5rem;
+    color: var(--fg);
+  }
+  @media (min-width: 640px) { .animated-name { font-size: 1.5rem; } }
+
+  .cursor::after {
+    content: '_';
+    animation: blink-cursor 1s step-end infinite;
+    font-weight: 300;
+    margin-left: 1px;
+  }
+
+  .fade-in-up  { opacity: 0; animation: fadeInUp 0.7s ease both; }
+  .fade-in-left{ opacity: 0; animation: fadeInLeft 0.7s ease both; }
+
+  .delay-100 { animation-delay: .1s; }
+  .delay-200 { animation-delay: .2s; }
+  .delay-300 { animation-delay: .3s; }
+  .delay-400 { animation-delay: .4s; }
+  .delay-500 { animation-delay: .5s; }
+  .delay-600 { animation-delay: .6s; }
+  .delay-700 { animation-delay: .7s; }
+
+  .float-anim { animation: subtleFloat 4s ease-in-out infinite; }
+
+  .glow-card {
+    border: 1px solid var(--border);
+    border-radius: 0.75rem;
+    padding: 1rem;
+    background: var(--card-bg);
+    transition: box-shadow 0.3s ease, transform 0.3s ease, background-color 0.4s ease, border-color 0.4s ease;
+  }
+  .glow-card:hover {
+    box-shadow: var(--card-hover-shadow);
+    transform: translateY(-3px);
+  }
+
+  .icon-glow {
+    display: inline-flex;
+    transition: filter 0.25s ease, transform 0.25s ease, color 0.2s ease;
+    filter: drop-shadow(0 0 0px rgba(0,0,0,0));
+    color: var(--muted-5);
+    cursor: pointer;
+    background: none;
+    border: none;
+    padding: 0;
+  }
+  .icon-glow:hover {
+    filter: var(--icon-hover-shadow);
+    transform: scale(1.15);
+    color: var(--fg);
+  }
+
+  .text-glow        { text-shadow: var(--text-glow); }
+  .text-glow-strong { text-shadow: var(--text-glow-strong); }
+  .section-title-glow { text-shadow: var(--section-glow); }
+
+  svg { display: block; }
+  .icon-sm { width: 1rem; height: 1rem; }
+  .icon-md { width: 1.25rem; height: 1.25rem; }
+
+  /* ── layout ── */
+  .divider { width: 100%; height: 1px; background: var(--border); margin: 2rem 0; transition: background-color 0.4s ease; }
+
+  .profile-row { display: flex; align-items: flex-start; gap: 1.25rem; margin-bottom: 3rem; }
+
+  .avatar {
+    flex-shrink: 0;
+    width: 4rem; height: 4rem;
+    border-radius: 0.75rem;
+    border: 1px solid var(--border-strong);
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.12);
+    transition: border-color 0.4s ease;
+  }
+  @media (min-width: 640px) { .avatar { width: 5rem; height: 5rem; } }
+
+  .shades-group {
+    transform-origin: 50px 32px;
+    transition: opacity 0.55s ease, transform 0.6s cubic-bezier(.34,1.56,.64,1);
+    opacity: 1;
+    transform: translate(0,0) rotate(0deg);
+  }
+  html[data-theme="dark"] .shades-group {
+    opacity: 0;
+    transform: translate(26px, -22px) rotate(-24deg);
+  }
+
+  .profile-meta { display: flex; flex-direction: column; justify-content: center; min-height: 4rem; }
+  @media (min-width: 640px) { .profile-meta { min-height: 5rem; } }
+
+  .handle { font-size: 0.75rem; color: var(--muted-4); text-transform: uppercase; letter-spacing: 0.15em; margin: 0 0 0.5rem 0; }
+
+  .meta-row { display: flex; flex-wrap: wrap; gap: 0.75rem; color: var(--muted-5); font-size: 0.75rem; }
+  .meta-item { display: flex; align-items: center; gap: 0.25rem; }
+
+  h2.section-title {
+    font-size: 0.75rem; font-weight: 600; text-transform: uppercase;
+    letter-spacing: 0.15em; color: var(--muted-4); margin: 0 0 1.25rem 0;
+  }
+
+  section { margin-bottom: 2.5rem; }
+
+  .grid-3, .grid-2 { display: grid; gap: 0.75rem; grid-template-columns: 1fr; }
+  @media (min-width: 640px) {
+    .grid-3 { grid-template-columns: repeat(3, 1fr); }
+    .grid-2 { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  .offer-head { display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem; color: var(--muted-7); }
+  .offer-title { font-size: 0.875rem; font-weight: 600; }
+  .offer-sub { font-size: 0.75rem; color: var(--muted-4); margin: 0; }
+
+  .service-card { display: flex; align-items: flex-start; gap: 0.75rem; }
+  .service-icon { margin-top: 0.125rem; color: var(--muted-6); flex-shrink: 0; }
+  .service-title { font-size: 0.875rem; font-weight: 600; color: var(--fg); margin: 0 0 0.125rem 0; }
+  .service-desc { font-size: 0.75rem; color: var(--muted-4); margin: 0; }
+
+  .projects-list { display: flex; flex-direction: column; gap: 1rem; }
+
+  .project-card {
+    display: block; text-decoration: none; color: inherit;
+    padding: 1.25rem;
+  }
+  .project-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 0.5rem; margin-bottom: 0.5rem; }
+  .project-name-row { display: flex; align-items: center; gap: 0.5rem; color: var(--fg); }
+  .project-name { font-size: 0.875rem; font-weight: 700; color: var(--fg); }
+  .project-desc { font-size: 0.75rem; color: var(--muted-5); line-height: 1.6; margin: 0; }
+
+  .status-list { display: flex; flex-direction: column; gap: 0.25rem; margin-top: 0.75rem; }
+  .status-row { font-size: 0.75rem; display: flex; align-items: center; gap: 0.375rem; color: var(--muted-4); }
+  .status-row.current { color: var(--muted-6); font-weight: 600; }
+  .dot { width: 0.375rem; height: 0.375rem; border-radius: 999px; background: var(--muted-2); flex-shrink: 0; }
+  .dot.current { background: var(--fg); }
+
+  .tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.75rem; }
+  .tag {
+    font-size: 0.75rem; border: 1px solid var(--border-strong); border-radius: 0.375rem;
+    padding: 0.125rem 0.5rem; color: var(--muted-4);
+    transition: border-color 0.4s ease;
+  }
+
+  .contact-row { display: flex; align-items: center; gap: 1.25rem; position: relative; }
+
+  .toast {
+    position: absolute;
+    left: 50%;
+    bottom: 2.25rem;
+    transform: translateX(-50%);
+    background: var(--toast-bg);
+    color: var(--toast-fg);
+    font-size: 0.7rem;
+    padding: 0.35rem 0.6rem;
+    border-radius: 0.375rem;
+    white-space: nowrap;
+    animation: toastIn 0.2s ease;
+    pointer-events: none;
+  }
+
+  .footer { margin-top: 4rem; font-size: 0.75rem; color: var(--muted-2); }
+</style>
+</head>
+<body>
+
+<button class="theme-toggle" id="themeToggle" title="Toggle theme" aria-label="Toggle dark and light mode">
+  <span class="theme-toggle-knob">
+    <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+    <svg class="icon-moon" viewBox="0 0 24 24" fill="currentColor"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+  </span>
+</button>
+
+<div class="wrap">
+
+  <!-- PROFILE ROW -->
+  <div class="profile-row fade-in-left">
+    <div class="avatar float-anim">
+      <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
+        <rect width="100" height="100" fill="var(--avatar-bg)" />
+        <rect x="28" y="55" width="44" height="35" rx="4" fill="#1a1a1a" />
+        <rect x="30" y="18" width="40" height="38" rx="6" fill="#e0c49a" />
+        <rect x="28" y="14" width="44" height="14" rx="5" fill="#1a1a1a" />
+        <rect x="38" y="28" width="8" height="8" rx="2" fill="#1a1a1a" />
+        <rect x="54" y="28" width="8" height="8" rx="2" fill="#1a1a1a" />
+        <rect x="40" y="30" width="3" height="3" rx="1" fill="#ffffff" />
+        <rect x="56" y="30" width="3" height="3" rx="1" fill="#ffffff" />
+        <path d="M42 42 Q50 48 58 42" stroke="#1a1a1a" stroke-width="2" fill="none" stroke-linecap="round" />
+        <rect x="42" y="55" width="16" height="6" rx="2" fill="#2a2a2a" />
+        <rect x="70" y="60" width="6" height="6" fill="#333" opacity="0.5" />
+        <rect x="24" y="60" width="6" height="6" fill="#333" opacity="0.5" />
+
+        <!-- sunglasses: on in light mode, animate off in dark mode -->
+        <g class="shades-group">
+          <path d="M30 30 q4 -4 8 -1 l1 1" stroke="#111" stroke-width="2" fill="none" stroke-linecap="round" />
+          <path d="M70 30 q-4 -4 -8 -1 l-1 1" stroke="#111" stroke-width="2" fill="none" stroke-linecap="round" />
+          <rect x="35" y="27" width="12" height="10" rx="3" fill="#111" />
+          <rect x="53" y="27" width="12" height="10" rx="3" fill="#111" />
+          <path d="M47 31 h6" stroke="#111" stroke-width="2" stroke-linecap="round" />
+          <rect x="36" y="29" width="4" height="3" rx="1" fill="#ffffff" opacity="0.35" />
+          <rect x="54" y="29" width="4" height="3" rx="1" fill="#ffffff" opacity="0.35" />
+        </g>
+      </svg>
+    </div>
+
+    <div class="profile-meta">
+      <h1 class="animated-name" id="typedName"></h1>
+      <p class="handle text-glow">aky.dev</p>
+      <div class="meta-row">
+        <span class="meta-item text-glow">
+          <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+          Philippines · UTC+8
+        </span>
+        <span class="meta-item text-glow">
+          <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          Available for work
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- I OFFER -->
+  <section id="offer" class="fade-in-up delay-200">
+    <h2 class="section-title section-title-glow">I offer</h2>
+    <div class="grid-3">
+      <div class="glow-card fade-in-up delay-200">
+        <div class="offer-head">
+          <svg class="icon-md" viewBox="0 0 24 24" fill="currentColor"><path d="M4 2h16a2 2 0 0 1 2 2v16a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2zm0 2v16h16V4H4zm2 2h4v4H6V6zm6 0h4v4h-4V6zm-6 6h4v4H6v-4zm6 6h4v4h-4v-4zm0-6h4v4h-4v-4zm-6 6h4v4H6v-4z"/></svg>
+          <span class="offer-title text-glow-strong">Minecraft Development</span>
+        </div>
+        <p class="offer-sub text-glow">3 years experience</p>
+      </div>
+      <div class="glow-card fade-in-up delay-300">
+        <div class="offer-head">
+          <svg class="icon-md" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="10" rx="2"/><circle cx="12" cy="5" r="2"/><path d="M12 7v4"/><line x1="8" y1="16" x2="8" y2="16"/><line x1="16" y1="16" x2="16" y2="16"/></svg>
+          <span class="offer-title text-glow-strong">Discord Bot Dev</span>
+        </div>
+        <p class="offer-sub text-glow">2 years · Python</p>
+      </div>
+      <div class="glow-card fade-in-up delay-400">
+        <div class="offer-head">
+          <svg class="icon-md" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+          <span class="offer-title text-glow-strong">Website Development</span>
+        </div>
+        <p class="offer-sub text-glow">2 years experience</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- SERVICES -->
+  <section id="services" class="fade-in-up delay-300">
+    <h2 class="section-title section-title-glow">Services</h2>
+    <div class="grid-2">
+      <div class="glow-card service-card fade-in-up delay-200">
+        <div class="service-icon">
+          <svg class="icon-md" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+        </div>
+        <div>
+          <p class="service-title text-glow-strong">Denizen Scripting</p>
+          <p class="service-desc text-glow">Custom scripts and quest systems for Paper servers</p>
+        </div>
+      </div>
+      <div class="glow-card service-card fade-in-up delay-300">
+        <div class="service-icon">
+          <svg class="icon-md" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+        </div>
+        <div>
+          <p class="service-title text-glow-strong">Spark Profiler Reading</p>
+          <p class="service-desc text-glow">Diagnose lag, analyze profiler reports & give fixes</p>
+        </div>
+      </div>
+      <div class="glow-card service-card fade-in-up delay-400">
+        <div class="service-icon">
+          <svg class="icon-md" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 0 1 1.76 2.41M22 12h-1M20.83 16.59A10 10 0 0 1 19.07 19.07M16.59 20.83A10 10 0 0 1 12 22M7.41 20.83a10 10 0 0 1-2.41-1.76M2 12H1M3.17 7.41A10 10 0 0 1 4.93 4.93M7.41 3.17A10 10 0 0 1 12 2"/></svg>
+        </div>
+        <div>
+          <p class="service-title text-glow-strong">Plugin Configuration</p>
+          <p class="service-desc text-glow">Full setup and tuning of any plugin to your needs</p>
+        </div>
+      </div>
+      <div class="glow-card service-card fade-in-up delay-500">
+        <div class="service-icon">
+          <svg class="icon-md" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/></svg>
+        </div>
+        <div>
+          <p class="service-title text-glow-strong">Server Optimization</p>
+          <p class="service-desc text-glow">Paper · Purpur · Pufferfish & beyond</p>
+        </div>
+      </div>
+      <div class="glow-card service-card fade-in-up delay-600">
+        <div class="service-icon">
+          <svg class="icon-md" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
+        </div>
+        <div>
+          <p class="service-title text-glow-strong">Custom Models Setup</p>
+          <p class="service-desc text-glow">Nexo · ItemsAdder · Oraxen resource packs</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- PROJECTS -->
+  <section id="projects" class="fade-in-up delay-400">
+    <h2 class="section-title section-title-glow">Projects</h2>
+    <div class="projects-list">
+
+      <a class="glow-card project-card fade-in-up delay-200" href="https://discord.gg/jkWE9S9wGm" target="_blank" rel="noopener noreferrer">
+        <div class="project-top">
+          <div class="project-name-row">
+            <svg class="icon-md" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <span class="project-name text-glow-strong">AKY Services</span>
+          </div>
+          <span class="icon-glow">
+            <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+          </span>
+        </div>
+        <p class="project-desc text-glow">A small business I run for Minecraft server owners — I handle Denizen scripting, plugin and paper configs, custom models (Nexo/Oraxen), Discord bots, full server dev, Spark analysis, LuckPerms, and more.</p>
+        <div class="tags">
+          <span class="tag text-glow">Denizen</span>
+          <span class="tag text-glow">Discord Bots</span>
+          <span class="tag text-glow">Configs</span>
+          <span class="tag text-glow">Models</span>
+          <span class="tag text-glow">Optimization</span>
+        </div>
+      </a>
+
+      <a class="glow-card project-card fade-in-up delay-300" href="https://magbungkal.com" target="_blank" rel="noopener noreferrer">
+        <div class="project-top">
+          <div class="project-name-row">
+            <svg class="icon-md" viewBox="0 0 24 24" fill="currentColor"><path d="M4 2h16a2 2 0 0 1 2 2v16a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2zm0 2v16h16V4H4zm2 2h4v4H6V6zm6 0h4v4h-4V6zm-6 6h4v4H6v-4zm6 6h4v4h-4v-4zm0-6h4v4h-4v-4zm-6 6h4v4H6v-4z"/></svg>
+            <span class="project-name text-glow-strong">Magbungkal MC</span>
+          </div>
+          <span class="icon-glow">
+            <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+          </span>
+        </div>
+        <p class="project-desc text-glow">A Minecraft server — Est. July 2023</p>
+        <div class="status-list">
+          <span class="status-row"><span class="dot"></span>Former Owner: July 2023 – March 2025</span>
+          <span class="status-row current"><span class="dot current"></span>Current Lead Developer: March 2025 – Present</span>
+        </div>
+        <div class="tags">
+          <span class="tag text-glow">Paper</span>
+          <span class="tag text-glow">Denizen</span>
+          <span class="tag text-glow">Custom Models</span>
+          <span class="tag text-glow">Server Dev</span>
+        </div>
+      </a>
+
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- CONTACT -->
+  <section id="contact" class="fade-in-up delay-500">
+    <h2 class="section-title section-title-glow">Contact</h2>
+    <div class="contact-row" id="contactRow">
+      <a class="icon-glow" href="mailto:aquiokenzie37@gmail.com" title="aquiokenzie37@gmail.com">
+        <svg class="icon-md" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+      </a>
+      <button class="icon-glow" id="discordCopy" title="@akiakyo · click to copy" type="button">
+        <svg class="icon-md" viewBox="0 0 24 24" fill="currentColor"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057c.002.022.015.043.03.056a19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/></svg>
+      </button>
+      <a class="icon-glow" href="https://github.com/akiakyo" target="_blank" rel="noopener noreferrer" title="GitHub">
+        <svg class="icon-md" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+      </a>
+    </div>
+  </section>
+
+  <div class="footer text-glow" id="footerYear"></div>
+
+</div>
+
+<script>
+  document.getElementById('footerYear').textContent = '© ' + new Date().getFullYear() + ' akiakyo · Philippines';
+
+  function typewriter(el, text, speed, delayBefore) {
+    el.textContent = '';
+    el.classList.remove('cursor');
+    setTimeout(function () {
+      var i = 0;
+      var interval = setInterval(function () {
+        i++;
+        el.textContent = text.slice(0, i);
+        if (i >= text.length) {
+          clearInterval(interval);
+          el.classList.add('cursor');
+        }
+      }, speed);
+    }, delayBefore);
+  }
+
+  typewriter(document.getElementById('typedName'), 'akiakyo', 120, 600);
+
+  /* ── theme toggle ── */
+  var root = document.documentElement;
+  var toggleBtn = document.getElementById('themeToggle');
+
+  function applyTheme(theme) {
+    root.setAttribute('data-theme', theme);
+    try { localStorage.setItem('aky-theme', theme); } catch (e) {}
+  }
+
+  (function initTheme() {
+    var saved = null;
+    try { saved = localStorage.getItem('aky-theme'); } catch (e) {}
+    if (saved === 'light' || saved === 'dark') {
+      applyTheme(saved);
+    } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+      applyTheme('dark');
+    } else {
+      applyTheme('light');
+    }
+  })();
+
+  toggleBtn.addEventListener('click', function () {
+    var current = root.getAttribute('data-theme');
+    applyTheme(current === 'dark' ? 'light' : 'dark');
+  });
+
+  /* ── discord handle copy ── */
+  var discordBtn = document.getElementById('discordCopy');
+  var contactRow = document.getElementById('contactRow');
+
+  discordBtn.addEventListener('click', function () {
+    var handle = '@akiakyo';
+    var showToast = function () {
+      var existing = contactRow.querySelector('.toast');
+      if (existing) existing.remove();
+      var toast = document.createElement('span');
+      toast.className = 'toast';
+      toast.textContent = 'Copied ' + handle;
+      contactRow.appendChild(toast);
+      setTimeout(function () { toast.remove(); }, 1600);
+    };
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(handle).then(showToast).catch(showToast);
+    } else {
+      showToast();
+    }
+  });
+</script>
+</body>
+</html>
