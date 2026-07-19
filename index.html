@@ -4,6 +4,12 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>akiakyo.dev</title>
+<meta name="description" content="Portfolio of akiakyo, a Philippines-based Minecraft, Discord bot, and website developer available for commissions." />
+<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
+<meta name="theme-color" content="#0a0a0a" media="(prefers-color-scheme: dark)" />
+<link rel="icon" type="image/svg+xml" href="favicon.svg" />
+<link rel="alternate icon" href="favicon.ico" />
+<link rel="apple-touch-icon" href="favicon.svg" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap" rel="stylesheet" />
@@ -317,9 +323,233 @@
   }
 
   .footer { margin-top: 4rem; font-size: 0.75rem; color: var(--muted-2); }
+
+
+  /* ── upgraded navigation & ambient effects ── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: -2;
+    background:
+      radial-gradient(circle at 12% 10%, rgba(127,127,127,.10), transparent 28rem),
+      radial-gradient(circle at 88% 70%, rgba(127,127,127,.08), transparent 32rem);
+  }
+
+  .noise {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    opacity: .025;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.55'/%3E%3C/svg%3E");
+  }
+
+  .top-nav {
+    position: sticky;
+    top: 1rem;
+    z-index: 40;
+    max-width: 56rem;
+    margin: 0 auto 2rem;
+    padding: .55rem .65rem;
+    border: 1px solid var(--border-strong);
+    border-radius: 1rem;
+    background: color-mix(in srgb, var(--bg) 78%, transparent);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    box-shadow: 0 10px 35px rgba(0,0,0,.06);
+  }
+
+  .brand {
+    text-decoration: none;
+    color: var(--fg);
+    font-size: .82rem;
+    font-weight: 800;
+    letter-spacing: -.04em;
+    padding: .45rem .55rem;
+  }
+
+  .nav-links { display: flex; align-items: center; gap: .2rem; }
+  .nav-links a {
+    color: var(--muted-6);
+    text-decoration: none;
+    font-size: .72rem;
+    padding: .5rem .6rem;
+    border-radius: .55rem;
+    transition: color .25s ease, background .25s ease, transform .25s ease;
+  }
+  .nav-links a:hover, .nav-links a:focus-visible {
+    color: var(--fg);
+    background: var(--card-bg);
+    transform: translateY(-1px);
+  }
+
+  .menu-toggle {
+    display: none;
+    border: 1px solid var(--border-strong);
+    background: var(--card-bg);
+    color: var(--fg);
+    width: 2.35rem;
+    height: 2.35rem;
+    border-radius: .7rem;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+  }
+
+  .hero-copy {
+    font-size: clamp(1rem, 3vw, 1.35rem);
+    line-height: 1.7;
+    color: var(--muted-6);
+    max-width: 44rem;
+    margin: -1.5rem 0 3rem 0;
+  }
+
+  .hero-actions { display:flex; flex-wrap:wrap; gap:.75rem; margin-top:1.15rem; }
+  .button {
+    display:inline-flex; align-items:center; justify-content:center; gap:.5rem;
+    min-height:2.6rem; padding:.65rem .9rem; border-radius:.7rem;
+    border:1px solid var(--border-strong); text-decoration:none;
+    color:var(--fg); background:var(--card-bg); font-size:.75rem; font-weight:700;
+    transition:transform .25s ease, box-shadow .25s ease, background .25s ease;
+  }
+  .button.primary { background:var(--fg); color:var(--bg); }
+  .button:hover { transform:translateY(-2px); box-shadow:var(--card-hover-shadow); }
+
+  .reveal { opacity:0; transform:translateY(26px); transition:opacity .7s ease, transform .7s cubic-bezier(.2,.7,.2,1); }
+  .reveal.is-visible { opacity:1; transform:none; }
+
+  .glow-card { position:relative; overflow:hidden; }
+  .glow-card::before {
+    content:''; position:absolute; width:8rem; height:8rem; border-radius:50%;
+    background:rgba(127,127,127,.10); filter:blur(28px); pointer-events:none;
+    left:var(--mx, 50%); top:var(--my, 50%); transform:translate(-50%,-50%);
+    opacity:0; transition:opacity .25s ease;
+  }
+  .glow-card:hover::before { opacity:1; }
+  .glow-card > * { position:relative; z-index:1; }
+
+  :focus-visible { outline:2px solid var(--fg); outline-offset:3px; }
+  ::selection { background:var(--fg); color:var(--bg); }
+
+  @media (max-width: 639px) {
+    .wrap { padding-top:1.25rem; }
+    .top-nav { margin:0 .75rem 1.5rem; top:.65rem; flex-wrap:wrap; }
+    .menu-toggle { display:inline-flex; }
+    .nav-links { display:none; width:100%; flex-direction:column; align-items:stretch; padding:.35rem 0 .15rem; }
+    .nav-links.open { display:flex; animation:fadeInUp .25s ease both; }
+    .nav-links a { padding:.7rem .75rem; }
+    .theme-toggle { top:.85rem; right:4rem; }
+    .profile-row { gap:.9rem; margin-bottom:2rem; }
+    .profile-meta { min-width:0; }
+    .meta-row { gap:.45rem; }
+    .hero-copy { margin-top:-.5rem; font-size:.9rem; }
+    .glow-card { padding:.95rem; }
+    .project-card { padding:1rem; }
+    .contact-row { gap:1.5rem; }
+  }
+
+  @media (max-width: 380px) {
+    .avatar { width:3.5rem; height:3.5rem; }
+    .animated-name { font-size:1.05rem; }
+    .handle { letter-spacing:.1em; }
+    .theme-toggle { transform:scale(.92); transform-origin:right top; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior:auto; }
+    *, *::before, *::after { animation-duration:.01ms !important; animation-iteration-count:1 !important; transition-duration:.01ms !important; }
+    .reveal { opacity:1; transform:none; }
+  }
+
+
+  /* ── enhanced hover animation, skill bars, counters & shrinking nav ── */
+  .top-nav {
+    transition: padding .35s ease, max-width .35s ease, border-radius .35s ease,
+                box-shadow .35s ease, transform .35s ease, background-color .35s ease;
+  }
+  .top-nav.is-scrolled {
+    max-width: 43rem;
+    padding: .32rem .5rem;
+    border-radius: .8rem;
+    box-shadow: 0 14px 40px rgba(0,0,0,.12);
+  }
+  .top-nav.is-scrolled .brand { padding: .3rem .45rem; font-size: .74rem; }
+  .top-nav.is-scrolled .nav-links a { padding: .36rem .5rem; font-size: .66rem; }
+  .top-nav.is-scrolled .menu-toggle { width: 2rem; height: 2rem; }
+
+  .avatar:hover { transform: rotate(-3deg) scale(1.06); box-shadow: var(--card-hover-shadow); }
+  .avatar { transition: transform .35s cubic-bezier(.2,.8,.2,1), box-shadow .35s ease, border-color .4s ease; }
+  .offer-head svg, .service-icon svg, .project-name-row svg {
+    transition: transform .35s cubic-bezier(.2,.8,.2,1), filter .35s ease;
+  }
+  .glow-card:hover .offer-head svg,
+  .glow-card:hover .service-icon svg,
+  .project-card:hover .project-name-row svg {
+    transform: rotate(-7deg) scale(1.13);
+    filter: var(--icon-hover-shadow);
+  }
+  .glow-card:hover .tag { transform: translateY(-2px); border-color: var(--muted-5); }
+  .tag { transition: transform .25s ease, border-color .25s ease, color .25s ease; }
+  .project-card:hover .project-name { letter-spacing: .015em; }
+  .project-name { transition: letter-spacing .25s ease; }
+  .service-card { align-items: stretch; }
+  .service-content { min-width: 0; width: 100%; }
+  .skill-meta { display:flex; justify-content:space-between; gap:.75rem; margin-top:.8rem; font-size:.68rem; color:var(--muted-5); }
+  .skill-track {
+    height:.42rem; margin-top:.38rem; overflow:hidden; border-radius:999px;
+    background:var(--border-strong); position:relative;
+  }
+  .skill-fill {
+    width:0; height:100%; border-radius:inherit; background:var(--fg);
+    box-shadow:0 0 12px color-mix(in srgb, var(--fg) 35%, transparent);
+    transition:width 1.25s cubic-bezier(.2,.75,.2,1);
+  }
+  .skill-fill::after {
+    content:''; position:absolute; inset:0; transform:translateX(-100%);
+    background:linear-gradient(90deg, transparent, color-mix(in srgb, var(--bg) 65%, transparent), transparent);
+    animation:skillShine 2.5s ease-in-out infinite;
+  }
+  @keyframes skillShine { 55%,100% { transform:translateX(130%); } }
+  .is-visible .skill-fill { width:var(--skill); }
+
+  .counter-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:.75rem; }
+  .counter-card { text-align:center; padding:1.3rem .75rem; }
+  .counter-value { display:block; font-size:clamp(1.55rem,5vw,2.35rem); font-weight:800; line-height:1; letter-spacing:-.07em; }
+  .counter-label { display:block; margin-top:.55rem; font-size:.68rem; color:var(--muted-5); line-height:1.45; }
+  .counter-card:hover .counter-value { transform:scale(1.08); }
+  .counter-value { transition:transform .3s cubic-bezier(.2,.8,.2,1); }
+
+  .security-toast {
+    position:fixed; left:50%; bottom:1.25rem; transform:translateX(-50%);
+    z-index:100; border:1px solid var(--border-strong); background:var(--toast-bg);
+    color:var(--toast-fg); padding:.55rem .75rem; border-radius:.55rem; font-size:.68rem;
+    box-shadow:0 10px 30px rgba(0,0,0,.18); animation:toastIn .2s ease;
+  }
+
+  @media (max-width:639px) {
+    .top-nav.is-scrolled { max-width:calc(100% - 1.5rem); padding:.28rem .42rem; }
+    .counter-grid { grid-template-columns:repeat(2,1fr); }
+  }
+
 </style>
 </head>
 <body>
+<div class="noise" aria-hidden="true"></div>
+<nav class="top-nav" aria-label="Primary navigation">
+  <a class="brand" href="#top">&lt;akiakyo.dev /&gt;</a>
+  <button class="menu-toggle" id="menuToggle" aria-label="Open navigation" aria-expanded="false">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+  </button>
+  <div class="nav-links" id="navLinks">
+    <a href="#offer">Offer</a><a href="#services">Services</a><a href="#stats">Stats</a><a href="#projects">Projects</a><a href="#contact">Contact</a>
+  </div>
+</nav>
 
 <button class="theme-toggle" id="themeToggle" title="Toggle theme" aria-label="Toggle dark and light mode">
   <span class="theme-toggle-knob">
@@ -328,7 +558,7 @@
   </span>
 </button>
 
-<div class="wrap">
+<div class="wrap" id="top">
 
   <!-- PROFILE ROW -->
   <div class="profile-row fade-in-left">
@@ -362,7 +592,7 @@
 
     <div class="profile-meta">
       <h1 class="animated-name" id="typedName"></h1>
-      <p class="handle text-glow">aky.dev</p>
+      <p class="handle text-glow">akiakyo.dev</p>
       <div class="meta-row">
         <span class="meta-item text-glow">
           <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
@@ -379,7 +609,7 @@
   <div class="divider"></div>
 
   <!-- I OFFER -->
-  <section id="offer" class="fade-in-up delay-200">
+  <section id="offer" class="reveal">
     <h2 class="section-title section-title-glow">I offer</h2>
     <div class="grid-3">
       <div class="glow-card fade-in-up delay-200">
@@ -409,52 +639,62 @@
   <div class="divider"></div>
 
   <!-- SERVICES -->
-  <section id="services" class="fade-in-up delay-300">
+  <section id="services" class="reveal">
     <h2 class="section-title section-title-glow">Services</h2>
     <div class="grid-2">
       <div class="glow-card service-card fade-in-up delay-200">
         <div class="service-icon">
           <svg class="icon-md" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
         </div>
-        <div>
+        <div class="service-content">
           <p class="service-title text-glow-strong">Denizen Scripting</p>
           <p class="service-desc text-glow">Custom scripts and quest systems for Paper servers</p>
+          <div class="skill-meta"><span>Proficiency</span><strong>89%</strong></div>
+          <div class="skill-track" role="progressbar" aria-label="Denizen Scripting proficiency" aria-valuemin="0" aria-valuemax="100" aria-valuenow="89"><div class="skill-fill" style="--skill:89%"></div></div>
         </div>
       </div>
       <div class="glow-card service-card fade-in-up delay-300">
         <div class="service-icon">
           <svg class="icon-md" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
         </div>
-        <div>
+        <div class="service-content">
           <p class="service-title text-glow-strong">Spark Profiler Reading</p>
           <p class="service-desc text-glow">Diagnose lag, analyze profiler reports & give fixes</p>
+          <div class="skill-meta"><span>Proficiency</span><strong>90%</strong></div>
+          <div class="skill-track" role="progressbar" aria-label="Spark Profiler Reading proficiency" aria-valuemin="0" aria-valuemax="100" aria-valuenow="90"><div class="skill-fill" style="--skill:90%"></div></div>
         </div>
       </div>
       <div class="glow-card service-card fade-in-up delay-400">
         <div class="service-icon">
           <svg class="icon-md" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 0 1 1.76 2.41M22 12h-1M20.83 16.59A10 10 0 0 1 19.07 19.07M16.59 20.83A10 10 0 0 1 12 22M7.41 20.83a10 10 0 0 1-2.41-1.76M2 12H1M3.17 7.41A10 10 0 0 1 4.93 4.93M7.41 3.17A10 10 0 0 1 12 2"/></svg>
         </div>
-        <div>
+        <div class="service-content">
           <p class="service-title text-glow-strong">Plugin Configuration</p>
           <p class="service-desc text-glow">Full setup and tuning of any plugin to your needs</p>
+          <div class="skill-meta"><span>Proficiency</span><strong>100%</strong></div>
+          <div class="skill-track" role="progressbar" aria-label="Plugin Configuration proficiency" aria-valuemin="0" aria-valuemax="100" aria-valuenow="100"><div class="skill-fill" style="--skill:100%"></div></div>
         </div>
       </div>
       <div class="glow-card service-card fade-in-up delay-500">
         <div class="service-icon">
           <svg class="icon-md" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/></svg>
         </div>
-        <div>
+        <div class="service-content">
           <p class="service-title text-glow-strong">Server Optimization</p>
           <p class="service-desc text-glow">Paper · Purpur · Pufferfish & beyond</p>
+          <div class="skill-meta"><span>Proficiency</span><strong>95%</strong></div>
+          <div class="skill-track" role="progressbar" aria-label="Server Optimization proficiency" aria-valuemin="0" aria-valuemax="100" aria-valuenow="95"><div class="skill-fill" style="--skill:95%"></div></div>
         </div>
       </div>
       <div class="glow-card service-card fade-in-up delay-600">
         <div class="service-icon">
           <svg class="icon-md" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
         </div>
-        <div>
+        <div class="service-content">
           <p class="service-title text-glow-strong">Custom Models Setup</p>
           <p class="service-desc text-glow">Nexo · ItemsAdder · Oraxen resource packs</p>
+          <div class="skill-meta"><span>Proficiency</span><strong>95%</strong></div>
+          <div class="skill-track" role="progressbar" aria-label="Custom Models Setup proficiency" aria-valuemin="0" aria-valuemax="100" aria-valuenow="95"><div class="skill-fill" style="--skill:95%"></div></div>
         </div>
       </div>
     </div>
@@ -462,8 +702,22 @@
 
   <div class="divider"></div>
 
+
+  <!-- COUNTERS -->
+  <section id="stats" class="reveal">
+    <h2 class="section-title section-title-glow">By the numbers</h2>
+    <div class="counter-grid">
+      <div class="glow-card counter-card"><span class="counter-value" data-target="3" data-suffix="+">0</span><span class="counter-label">Years in Minecraft development</span></div>
+      <div class="glow-card counter-card"><span class="counter-value" data-target="5">0</span><span class="counter-label">Specialized services</span></div>
+      <div class="glow-card counter-card"><span class="counter-value" data-target="3">0</span><span class="counter-label">Featured projects</span></div>
+      <div class="glow-card counter-card"><span class="counter-value" data-target="100" data-suffix="%">0</span><span class="counter-label">Plugin configuration proficiency</span></div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
   <!-- PROJECTS -->
-  <section id="projects" class="fade-in-up delay-400">
+  <section id="projects" class="reveal">
     <h2 class="section-title section-title-glow">Projects</h2>
     <div class="projects-list">
 
@@ -510,13 +764,31 @@
         </div>
       </a>
 
+      <article class="glow-card project-card fade-in-up delay-400">
+        <div class="project-top">
+          <div class="project-name-row">
+            <svg class="icon-md" viewBox="0 0 24 24" fill="currentColor"><path d="M4 2h16a2 2 0 0 1 2 2v16a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2zm0 2v16h16V4H4zm2 2h4v4H6V6zm6 0h4v4h-4V6zm-6 6h4v4H6v-4zm6 6h4v4h-4v-4zm0-6h4v4h-4v-4zm-6 6h4v4H6v-4z"/></svg>
+            <span class="project-name text-glow-strong">SkyMania MC</span>
+          </div>
+        </div>
+        <p class="project-desc text-glow">A Minecraft server — Est. October 2024</p>
+        <div class="status-list">
+          <span class="status-row"><span class="dot"></span>Lead Developer: October 2024 – March 2025</span>
+        </div>
+        <div class="tags">
+          <span class="tag text-glow">Minecraft</span>
+          <span class="tag text-glow">Server Development</span>
+          <span class="tag text-glow">Plugin Configuration</span>
+        </div>
+      </article>
+
     </div>
   </section>
 
   <div class="divider"></div>
 
   <!-- CONTACT -->
-  <section id="contact" class="fade-in-up delay-500">
+  <section id="contact" class="reveal">
     <h2 class="section-title section-title-glow">Contact</h2>
     <div class="contact-row" id="contactRow">
       <a class="icon-glow" href="mailto:aquiokenzie37@gmail.com" title="aquiokenzie37@gmail.com">
@@ -603,6 +875,114 @@
       showToast();
     }
   });
+
+  /* ── responsive navigation ── */
+  var menuToggle = document.getElementById('menuToggle');
+  var navLinks = document.getElementById('navLinks');
+  menuToggle.addEventListener('click', function () {
+    var isOpen = navLinks.classList.toggle('open');
+    menuToggle.setAttribute('aria-expanded', String(isOpen));
+    menuToggle.setAttribute('aria-label', isOpen ? 'Close navigation' : 'Open navigation');
+  });
+  navLinks.querySelectorAll('a').forEach(function(link) {
+    link.addEventListener('click', function() {
+      navLinks.classList.remove('open');
+      menuToggle.setAttribute('aria-expanded', 'false');
+    });
+  });
+
+  /* ── reveal content as it enters the viewport ── */
+  var revealItems = document.querySelectorAll('.reveal');
+  if ('IntersectionObserver' in window) {
+    var observer = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px' });
+    revealItems.forEach(function(item) { observer.observe(item); });
+  } else {
+    revealItems.forEach(function(item) { item.classList.add('is-visible'); });
+  }
+
+  /* ── pointer-following card glow ── */
+  document.querySelectorAll('.glow-card').forEach(function(card) {
+    card.addEventListener('pointermove', function(event) {
+      var rect = card.getBoundingClientRect();
+      card.style.setProperty('--mx', (event.clientX - rect.left) + 'px');
+      card.style.setProperty('--my', (event.clientY - rect.top) + 'px');
+    });
+  });
+
+
+  /* ── shrink navigation after scrolling ── */
+  var topNav = document.querySelector('.top-nav');
+  var updateNavigationSize = function () {
+    topNav.classList.toggle('is-scrolled', window.scrollY > 70);
+  };
+  updateNavigationSize();
+  window.addEventListener('scroll', updateNavigationSize, { passive: true });
+
+  /* ── animated section counters ── */
+  function animateCounter(element) {
+    if (element.dataset.animated === 'true') return;
+    element.dataset.animated = 'true';
+    var target = Number(element.dataset.target || 0);
+    var suffix = element.dataset.suffix || '';
+    var started = performance.now();
+    var duration = 1250;
+    function frame(now) {
+      var progress = Math.min((now - started) / duration, 1);
+      var eased = 1 - Math.pow(1 - progress, 3);
+      element.textContent = Math.round(target * eased) + suffix;
+      if (progress < 1) requestAnimationFrame(frame);
+    }
+    requestAnimationFrame(frame);
+  }
+  var statsSection = document.getElementById('stats');
+  if ('IntersectionObserver' in window && statsSection) {
+    var counterObserver = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          entry.target.querySelectorAll('.counter-value').forEach(animateCounter);
+          counterObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: .35 });
+    counterObserver.observe(statsSection);
+  } else if (statsSection) {
+    statsSection.querySelectorAll('.counter-value').forEach(animateCounter);
+  }
+
+  /* ── basic source-inspection deterrents ──
+     Browser-delivered HTML can never be made truly non-inspectable. These only
+     discourage casual right-click and common keyboard shortcuts. */
+  function showSecurityNotice() {
+    var oldNotice = document.querySelector('.security-toast');
+    if (oldNotice) oldNotice.remove();
+    var notice = document.createElement('div');
+    notice.className = 'security-toast';
+    notice.textContent = 'Developer shortcuts are disabled on this page.';
+    document.body.appendChild(notice);
+    setTimeout(function () { notice.remove(); }, 1800);
+  }
+  document.addEventListener('contextmenu', function(event) {
+    event.preventDefault();
+    showSecurityNotice();
+  });
+  document.addEventListener('keydown', function(event) {
+    var key = event.key.toLowerCase();
+    var blocked = event.key === 'F12' ||
+      (event.ctrlKey && event.shiftKey && ['i','j','c'].includes(key)) ||
+      (event.ctrlKey && ['u','s'].includes(key));
+    if (blocked) {
+      event.preventDefault();
+      showSecurityNotice();
+    }
+  });
+
 </script>
 </body>
 </html>
