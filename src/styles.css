@@ -1150,16 +1150,16 @@ html[data-theme='dark'] .av-smile {
 .hw-char {
   display: inline-block;
   opacity: 0;
-  clip-path: inset(-30% 100% -30% -15%);
+  clip-path: inset(-0.3em 100% -0.3em -0.3em);
 }
 .visible .hw-char {
   animation: hw-write 0.35s ease-out forwards;
   animation-delay: calc(var(--hw-d, 0ms) + var(--i) * var(--hw-s, 40ms));
 }
 @keyframes hw-write {
-  0% { opacity: 0; clip-path: inset(-30% 100% -30% -15%); }
+  0% { opacity: 0; clip-path: inset(-0.3em 100% -0.3em -0.3em); }
   25% { opacity: 1; }
-  100% { opacity: 1; clip-path: inset(-30% -40% -30% -15%); }
+  100% { opacity: 1; clip-path: inset(-0.3em -0.5em -0.3em -0.3em); }
 }
 
 /* hero copy that isn't handwritten fades in while the headline is being written */
