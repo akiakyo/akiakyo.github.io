@@ -1,8 +1,8 @@
 name: deploy to github pages
 
+# manual only for now: actions is unavailable on this account, so the site
+# deploys with `npm run deploy` (gh-pages branch). switch back to push when actions works.
 on:
-  push:
-    branches: [main]
   workflow_dispatch:
 
 permissions:
