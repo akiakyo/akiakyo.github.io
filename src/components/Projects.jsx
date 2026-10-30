@@ -6,16 +6,9 @@ export default function Projects() {
   return (
     <Section id="projects" title="featured projects" note="selected work">
       <div className="project-board">
-        {projects.map((p, i) => (
-          <a
-            key={p.name}
-            className={`sticky project draw-in ${p.color} ${i % 2 ? 'tilt-r' : 'tilt-l'}`}
-            href={p.href}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <span className="pin" aria-hidden="true" />
-            <div className="logo-circle" style={{ background: p.logoBg }}>
+        {projects.map((p) => (
+          <a key={p.name} className={`panel project pop-in ${p.color}`} href={p.href} target="_blank" rel="noopener noreferrer">
+            <div className="logo-box" style={{ background: p.logoBg }}>
               <img src={p.logo} alt={`${p.name} logo`} loading="lazy" />
             </div>
             <h3>{p.name}</h3>

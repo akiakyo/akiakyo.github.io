@@ -6,11 +6,11 @@ export default function Stack() {
     <Section id="stack" title="tech stack" note="languages, frameworks & tools">
       <div className="toolbox">
         {stack.map((group) => (
-          <div key={group.title} className="tool-group sketch draw-in">
+          <div key={group.title} className="tool-group panel pop-in">
             <h3>{group.title}</h3>
             <ul>
               {group.items.map((item) => (
-                <li key={item} className="circled">
+                <li key={item} className="chip">
                   {item}
                 </li>
               ))}

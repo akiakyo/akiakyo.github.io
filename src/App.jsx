@@ -1,6 +1,5 @@
 import { profile } from './data';
 import { useReveal, useSfx, useTheme } from './hooks';
-import { RoughFilter } from './components/Doodles';
 import Nav from './components/Nav';
 import Hero from './components/Hero';
 import About from './components/About';
@@ -17,7 +16,6 @@ export default function App() {
 
   return (
     <>
-      <RoughFilter />
       <Nav theme={theme} onToggleTheme={toggleTheme} />
       <main className="page" id="top">
         <Hero />
@@ -31,7 +29,7 @@ export default function App() {
           <span>
             © {new Date().getFullYear()} {profile.name}
           </span>
-          <span>built with react · vite · drawn by hand ✎</span>
+          <span>built with react · vite · placed pixel by pixel</span>
         </footer>
       </main>
     </>

@@ -9,9 +9,9 @@ export default function Experience() {
         {experience.map((job) => (
           <li key={job.name} className="timeline-item">
             <span className="dot" aria-hidden="true" />
-            <article className="index-card sketch draw-in">
+            <article className="job-card panel pop-in">
               <div className="card-top">
-                <div className="logo-circle" style={{ background: job.logoBg }}>
+                <div className="logo-box" style={{ background: job.logoBg }}>
                   <img src={job.logo} alt={`${job.name} logo`} loading="lazy" />
                 </div>
                 <div>
