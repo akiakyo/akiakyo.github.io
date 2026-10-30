@@ -2,9 +2,9 @@ import { useEffect, useRef, useState } from 'react';
 import { profile } from '../data';
 import { ArrowIcon, CopyIcon, MailIcon } from '../icons';
 import { sfx } from '../sfx';
-import { Plane, Tape } from './Doodles';
-import Handwrite from './Handwrite';
+import { Heart } from './Pixels';
 import Section from './Section';
+import Typewrite from './Typewrite';
 
 export default function Contact() {
   const [copyLabel, setCopyLabel] = useState('copy discord');
@@ -26,18 +26,21 @@ export default function Contact() {
 
   return (
     <Section id="contact" title="contact" note="let's build something">
-      <div className="letter sketch draw-in">
-        <Tape className="tape-corner" />
-        <Plane className="plane" style={{ '--draw-d': '2.6s' }} />
+      <div className="letter panel pop-in">
+        <div className="hearts" aria-hidden="true">
+          <Heart />
+          <Heart />
+          <Heart />
+        </div>
         <p className="dear">
-          <Handwrite text="hey there," delay={1100} speed={45} />
+          <Typewrite text="hey there," delay={400} speed={45} />
         </p>
         <h3>
-          <Handwrite text="want to work together?" delay={1550} speed={40} />
+          <Typewrite text="want to work together?" delay={850} speed={40} />
         </h3>
         <p>reach out for software projects, collaborations, product work, or engineering opportunities.</p>
         <p className="sign">
-          <Handwrite text="— aquio" delay={2500} speed={70} />
+          <Typewrite text="— aquio" delay={1800} speed={70} />
         </p>
         <div className="actions">
           <a className="btn primary" href={`mailto:${profile.email}`}>

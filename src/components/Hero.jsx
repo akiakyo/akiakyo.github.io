@@ -1,31 +1,31 @@
 import { profile } from '../data';
 import { ArrowIcon, PinIcon } from '../icons';
 import Avatar from './Avatar';
-import { CurlyArrow, Scribble, Star, Tape } from './Doodles';
-import Handwrite, { writeTime } from './Handwrite';
+import { Sparkle } from './Pixels';
+import Typewrite, { typeTime } from './Typewrite';
 
-// timeline for the hero's handwriting, in ms
-const hello = `hi, i'm ${profile.name} ✎`;
+// timeline for the hero's typing, in ms
+const hello = `hi, i'm ${profile.name}`;
 const line = 'software engineer building things people';
 const LINE_START = 500;
 const LINE_SPEED = 24;
-const ACCENT_START = LINE_START + writeTime(line, LINE_SPEED) + 100;
+const ACCENT_START = LINE_START + typeTime(line, LINE_SPEED) + 100;
 const ACCENT_SPEED = 45;
-const UNDERLINE_START = ACCENT_START + writeTime('actually use.', ACCENT_SPEED);
+const CARET_START = ACCENT_START + typeTime('actually use.', ACCENT_SPEED);
 
 export default function Hero() {
   return (
     <header className="hero reveal">
       <div className="hero-copy">
         <p className="hello">
-          <Handwrite text={hello} speed={30} />
+          <Typewrite text={hello} speed={30} />
         </p>
         <h1>
-          <Handwrite text={line} delay={LINE_START} speed={LINE_SPEED} />{' '}
-          <span className="underlined">
-            <Handwrite text="actually use." delay={ACCENT_START} speed={ACCENT_SPEED} />
-            <Scribble className="underline-svg" style={{ '--draw-d': `${UNDERLINE_START}ms` }} />
+          <Typewrite text={line} delay={LINE_START} speed={LINE_SPEED} />{' '}
+          <span className="accent-text">
+            <Typewrite text="actually use." delay={ACCENT_START} speed={ACCENT_SPEED} />
           </span>
+          <span className="caret" style={{ '--caret-d': `${CARET_START}ms` }} aria-hidden="true" />
         </h1>
         <p className="hero-role">
           founder of <mark>sintachat</mark>, cto &amp; software engineer at <mark>zxeno studio</mark>, lead developer at{' '}
@@ -45,20 +45,18 @@ export default function Hero() {
         </div>
       </div>
 
-      <figure className="polaroid">
-        <Tape className="tape-top" />
-        <div className="polaroid-photo">
+      <figure className="player-card">
+        <div className="player-stage">
           <Avatar />
         </div>
         <figcaption>
           <PinIcon /> {profile.location}
         </figcaption>
-        <div className="note-me" aria-hidden="true">
-          <Handwrite text="that's me!" delay={2200} speed={50} />
-          <CurlyArrow className="arrow" style={{ '--draw-d': '2.7s' }} />
+        <div className="bubble" aria-hidden="true">
+          <Typewrite text="that's me!" delay={2200} speed={50} />
         </div>
-        <Star className="star star-a" style={{ '--draw-d': '3s' }} />
-        <Star className="star star-b" style={{ '--draw-d': '3.2s' }} />
+        <Sparkle className="star star-a" />
+        <Sparkle className="star star-b" />
       </figure>
     </header>
   );

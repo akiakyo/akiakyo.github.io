@@ -47,11 +47,11 @@ export function useActiveSection(ids) {
   return active;
 }
 
-// adds .visible to every .reveal / .draw-in element once it scrolls into view,
-// and plays a pencil scratch when that brings handwriting with it
+// adds .visible to every .reveal / .pop-in element once it scrolls into view,
+// and plays typing blips when that brings typed text with it
 export function useReveal() {
   useEffect(() => {
-    const items = document.querySelectorAll('.reveal, .draw-in');
+    const items = document.querySelectorAll('.reveal, .pop-in');
     if (!('IntersectionObserver' in window)) {
       items.forEach((el) => el.classList.add('visible'));
       return;
@@ -62,7 +62,7 @@ export function useReveal() {
           if (!e.isIntersecting) return;
           e.target.classList.add('visible');
           observer.unobserve(e.target);
-          if (e.target.classList.contains('reveal') && e.target.querySelector('.hw')) sfx.scratch(1.1);
+          if (e.target.classList.contains('reveal') && e.target.querySelector('.tw')) sfx.typing(1.1);
         }),
       { threshold: 0.1, rootMargin: '0px 0px -30px' }
     );
@@ -90,7 +90,7 @@ export function useSfxEnabled() {
   return on;
 }
 
-// site-wide sounds: paper tick on hover, pencil tap on click.
+// site-wide sounds: soft blip on hover, select beep on click.
 // elements can opt into another sound with data-sfx="flip", or out with data-sfx="none".
 export function useSfx() {
   useEffect(() => {

@@ -3,7 +3,6 @@ import { createPortal } from 'react-dom';
 import { sideProjects } from '../data';
 import { ArrowIcon, CloseIcon, ExpandIcon, NextIcon, PrevIcon } from '../icons';
 import { sfx } from '../sfx';
-import { Tape } from './Doodles';
 import Section from './Section';
 
 const wrap = (i, n) => (i + n) % n;
@@ -31,10 +30,10 @@ function Lightbox({ project, index, onIndex, onClose }) {
     };
   }, [index, shots.length, onIndex, onClose]);
 
-  // portal to body: the tilted card's transform would otherwise trap position: fixed
+  // portal to body: the section's reveal transform would otherwise trap position: fixed
   return createPortal(
     <div className="lightbox" role="dialog" aria-modal="true" aria-label={`${project.name} screenshots`} onClick={onClose}>
-      <figure className="lightbox-frame sketch" data-sfx="flip" onClick={(e) => e.stopPropagation()}>
+      <figure className="lightbox-frame panel" data-sfx="flip" onClick={(e) => e.stopPropagation()}>
         <img src={shots[index].src} alt={shots[index].caption} />
         <figcaption>
           <span>
@@ -57,15 +56,14 @@ function Lightbox({ project, index, onIndex, onClose }) {
   );
 }
 
-function SideCard({ project, tilt }) {
+function SideCard({ project }) {
   const [index, setIndex] = useState(0);
   const [zoomed, setZoomed] = useState(false);
   const shots = project.shots;
   const shot = shots[index];
 
   return (
-    <article className={`side-card sketch draw-in ${tilt}`}>
-      <Tape className="tape-top" />
+    <article className="side-card panel pop-in">
       <div className="browser" data-sfx="flip">
         <div className="browser-bar" aria-hidden="true">
           <span />
@@ -130,8 +128,8 @@ export default function SideProjects() {
   return (
     <Section id="side-projects" title="side projects" note="things i built for fun & friends">
       <div className="side-grid">
-        {sideProjects.map((p, i) => (
-          <SideCard key={p.name} project={p} tilt={i % 2 ? 'tilt-r' : 'tilt-l'} />
+        {sideProjects.map((p) => (
+          <SideCard key={p.name} project={p} />
         ))}
       </div>
     </Section>

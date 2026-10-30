@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://akiakyo.dev/sitemap.xml
