@@ -142,6 +142,22 @@ export const sideProjects = [
     href: 'https://kenvisuals.vercel.app/',
     label: 'kenvisuals.vercel.app',
   },
+  {
+    name: 'akademy',
+    kicker: 'free coding tutorials',
+    shots: gallery('akademy', [
+      'home — learn to code, one lesson at a time',
+      'course page with a free certificate',
+      'lessons with basics, keywords and tips',
+      'live editor that runs code in the browser',
+      'flashcards for every lesson',
+      'chapter quizzes and final exams',
+      'printable certificate of completion',
+    ]),
+    desc: 'free place to learn programming with 34 courses and 133 short lessons in a chalkboard theme, with a live editor, flashcards, quizzes and certificates. no install and no account.',
+    href: 'https://akademyy.vercel.app/',
+    label: 'akademyy.vercel.app',
+  },
 ];
 
 export const stack = [
