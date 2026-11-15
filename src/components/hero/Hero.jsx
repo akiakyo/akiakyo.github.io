@@ -71,7 +71,7 @@ export default function Hero() {
             {profile.name}
           </h1>
           <p className="bio blur-in" style={{ '--i': 2 }}>
-            I'm a <Chip icon={<CodeIcon />}>software engineer</Chip> studying computer engineering at{' '}
+            I'm an aspiring <Chip icon={<CodeIcon />}>software engineer</Chip> studying computer engineering at{' '}
             <Chip logo={pup.logo}>PUP</Chip>. These days I'm building{' '}
             <LogoStack logos={[sinta, zxeno]}>SintaChat &amp; ZXENO Studio</LogoStack> as founder and CTO.
           </p>
