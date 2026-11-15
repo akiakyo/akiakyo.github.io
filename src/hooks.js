@@ -19,35 +19,9 @@ export function useTheme() {
   return [theme, toggle];
 }
 
-// smooth scroll without touching the url
-export function scrollToSection(id) {
-  const el = document.getElementById(id);
-  if (!el) return;
-  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if (id === 'top') window.scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' });
-  else el.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' });
-}
-
-export function useActiveSection(ids) {
-  const [active, setActive] = useState(null);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => entries.forEach((e) => e.isIntersecting && setActive(e.target.id)),
-      { rootMargin: '-28% 0px -62% 0px', threshold: 0 }
-    );
-    ids.forEach((id) => {
-      const el = document.getElementById(id);
-      if (el) observer.observe(el);
-    });
-    return () => observer.disconnect();
-  }, [ids]);
-
-  return active;
-}
-
-// adds .visible to every .reveal element once it scrolls into view
-export function useReveal() {
+// adds .visible to every .reveal element once it scrolls into view.
+// key changes (a new page) re-scan for the new elements.
+export function useReveal(key) {
   useEffect(() => {
     const items = document.querySelectorAll('.reveal');
     if (!('IntersectionObserver' in window)) {
@@ -66,7 +40,7 @@ export function useReveal() {
     );
     items.forEach((el) => observer.observe(el));
     return () => observer.disconnect();
-  }, []);
+  }, [key]);
 }
 
 export function useScrolled(offset = 80) {

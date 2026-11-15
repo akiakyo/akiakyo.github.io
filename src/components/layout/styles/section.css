@@ -31,3 +31,50 @@
 .section-head .text-link:hover {
   color: var(--ink);
 }
+
+/* the big title at the top of each page */
+.page-head {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 48px 4px 8px;
+}
+.page-head h1 {
+  font-family: var(--mono);
+  font-size: clamp(36px, 6vw, 56px);
+  font-weight: 500;
+  letter-spacing: -0.045em;
+}
+.page-head-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 4px 16px;
+}
+.page-head-row p {
+  font-size: 17px;
+}
+.page-head .text-link {
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+}
+.page-head .text-link svg {
+  width: 13px;
+  height: 13px;
+}
+
+@media (max-width: 640px) {
+  .page-head {
+    padding-top: 32px;
+  }
+}
+
+.not-found {
+  align-items: flex-start;
+  min-height: 50vh;
+  justify-content: center;
+}

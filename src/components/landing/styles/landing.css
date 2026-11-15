@@ -1,0 +1,297 @@
+/* six-column bento: experience wide, then rows of two-column cards, contact full width */
+.bento {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 16px;
+}
+.bento-cell {
+  display: flex;
+  min-width: 0;
+}
+.span-2 {
+  grid-column: span 2;
+}
+.span-4 {
+  grid-column: span 4;
+}
+.span-6 {
+  grid-column: span 6;
+}
+
+.bento-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  min-height: 300px;
+  padding: 24px;
+  transition: transform 0.25s cubic-bezier(0.2, 0.7, 0.2, 1), box-shadow 0.25s ease;
+}
+.bento-copy {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding-right: 56px;
+}
+.bento-title {
+  font-family: var(--mono);
+  font-size: 20px;
+  font-weight: 500;
+  letter-spacing: -0.03em;
+}
+.bento-text {
+  font-size: 15px;
+}
+.bento-arrow {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 40px;
+  height: 40px;
+  transition: transform 0.25s cubic-bezier(0.3, 1.5, 0.5, 1);
+}
+.bento-visual {
+  position: relative;
+  display: flex;
+  flex: 1;
+  align-items: flex-end;
+  margin-top: 20px;
+}
+
+@media (hover: hover) {
+  .bento-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-md);
+  }
+  .bento-card:hover .bento-arrow {
+    transform: translate(2px, -2px) rotate(-8deg);
+  }
+}
+
+/* experience: the four roles as a quiet list */
+.mini-roles {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  width: 100%;
+}
+.mini-role {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+  padding: 12px 14px;
+  background: var(--raised);
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-sm);
+}
+.mini-role img {
+  flex-shrink: 0;
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
+}
+.mini-role span {
+  min-width: 0;
+}
+.mini-role strong,
+.mini-role small {
+  display: block;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.mini-role strong {
+  font-size: 14px;
+  font-weight: 600;
+}
+.mini-role small {
+  font-size: 12px;
+  color: var(--ink-3);
+}
+
+/* projects: three small cards fanned like the projects page */
+.mini-fan {
+  position: relative;
+  display: grid;
+  justify-items: center;
+  width: 100%;
+  height: 150px;
+}
+.mini-fan-card {
+  grid-area: 1 / 1;
+  align-self: end;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 108px;
+  height: 128px;
+  background: var(--raised);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  box-shadow: var(--shadow-md);
+  transform: translateX(calc(var(--n) * 64%)) rotate(calc(var(--n) * 10deg));
+  transform-origin: 50% 100%;
+  transition: transform 0.35s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.mini-fan-card img {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+}
+.mini-fan-card small {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--ink-2);
+}
+@media (hover: hover) {
+  .bento-card:hover .mini-fan-card {
+    transform: translateX(calc(var(--n) * 82%)) rotate(calc(var(--n) * 14deg)) translateY(-4px);
+  }
+}
+
+/* side projects: a browser frame cut off by the card's bottom edge */
+.side-peek {
+  padding-bottom: 0;
+  overflow: hidden;
+}
+.mini-browser {
+  display: block;
+  width: 100%;
+  overflow: hidden;
+  border-radius: 12px 12px 0 0;
+  background: var(--raised);
+  box-shadow: var(--shadow-md);
+  transform: translateY(12px);
+  transition: transform 0.3s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.mini-bar {
+  display: flex;
+  gap: 5px;
+  padding: 8px 10px;
+  border-bottom: 1px solid var(--line);
+}
+.mini-bar i {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--line-strong);
+}
+.mini-browser img {
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  object-position: top;
+}
+@media (hover: hover) {
+  .bento-card:hover .mini-browser {
+    transform: translateY(0);
+  }
+}
+
+/* stack: a strip of tech logos, gray until the card is hovered */
+.mini-logos {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 18px 12px;
+  width: 100%;
+  justify-items: center;
+  padding-bottom: 8px;
+}
+.mini-logos .tech-icon {
+  width: 30px;
+  height: 30px;
+}
+@media (hover: hover) {
+  .bento-card:hover .mini-logos .tech-icon {
+    filter: none;
+    opacity: 1;
+  }
+  html[data-theme='dark'] .bento-card:hover .mini-logos .tech-icon.ink {
+    filter: invert(1);
+  }
+}
+
+/* about: a few of the things aky works on */
+.mini-skills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.mini-skills span {
+  padding: 5px 12px;
+  border-radius: 10px;
+  background: var(--raised);
+  box-shadow: var(--shadow-sm);
+  font-size: 13px;
+  font-weight: 500;
+}
+
+/* contact: the one black card */
+/* .bento-card raises specificity over the shared .card background, which loads later */
+.bento-card.contact-cta {
+  min-height: 0;
+  padding: 28px;
+  background: var(--brand);
+  color: var(--on-brand);
+}
+.contact-cta .bento-title {
+  font-size: 24px;
+}
+.contact-cta .bento-text {
+  color: var(--on-brand);
+  opacity: 0.72;
+  overflow-wrap: anywhere;
+}
+.contact-cta .bento-arrow {
+  top: 50%;
+  right: 24px;
+  background: var(--on-brand);
+  color: var(--brand);
+  transform: translateY(-50%);
+}
+@media (hover: hover) {
+  .contact-cta:hover .bento-arrow {
+    transform: translateY(-50%) rotate(-8deg) scale(1.06);
+  }
+}
+
+@media (max-width: 960px) {
+  .span-2 {
+    grid-column: span 3;
+  }
+  .span-4 {
+    grid-column: span 6;
+  }
+}
+@media (max-width: 640px) {
+  .bento {
+    grid-template-columns: 1fr;
+  }
+  .span-2,
+  .span-4,
+  .span-6 {
+    grid-column: auto;
+  }
+  .bento-card {
+    min-height: 0;
+  }
+  .mini-roles {
+    grid-template-columns: 1fr;
+  }
+  .contact-cta .bento-arrow {
+    top: 24px;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bento-card,
+  .bento-arrow,
+  .mini-fan-card,
+  .mini-browser {
+    transition: none;
+  }
+}

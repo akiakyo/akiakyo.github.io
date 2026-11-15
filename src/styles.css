@@ -302,16 +302,64 @@ html[data-theme='dark'] .logo-ink {
 }
 
 /* ---------- footer ---------- */
+/* the footer lists every page, so any page is one click away (aky, 2026-11-15) */
 .footer {
   display: flex;
   flex-wrap: wrap;
+  align-items: center;
   justify-content: space-between;
-  gap: 8px;
-  margin-top: 40px;
-  padding: 24px 4px 0;
+  gap: 8px 24px;
+  max-width: 1072px;
+  margin: 0 auto;
+  padding: 20px 4px 48px;
   border-top: 1px solid var(--line);
   font-size: 14px;
   color: var(--ink-3);
+}
+.footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 4px;
+}
+.footer-links a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0 8px;
+  border-radius: 8px;
+  color: var(--ink-2);
+}
+.footer-links a:first-child {
+  padding-left: 0;
+}
+.footer-links a:hover,
+.footer-links a[aria-current='page'] {
+  color: var(--ink);
+}
+@media (max-width: 1120px) {
+  .footer {
+    margin: 0 24px;
+  }
+}
+@media (max-width: 640px) {
+  .footer {
+    margin: 0 16px;
+  }
+}
+
+/* a soft blur-fade each time the page changes */
+.route-view {
+  animation: route-in 0.5s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+@keyframes route-in {
+  from {
+    opacity: 0;
+    filter: blur(6px);
+  }
+  to {
+    opacity: 1;
+    filter: none;
+  }
 }
 
 /* ---------- reveal: blur-fade on first view (aky, 2026-11-15) ---------- */
@@ -380,6 +428,9 @@ html[data-theme='dark'] .logo-ink {
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .route-view {
+    animation: none;
+  }
   .reveal {
     opacity: 1;
     transform: none;

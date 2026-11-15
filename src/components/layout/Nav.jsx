@@ -1,42 +1,37 @@
 import { useState } from 'react';
-import { navLinks } from '../../data';
+import { pages } from '../../pages';
+import { Link } from '../../router';
 import { CloseIcon, MenuIcon, MoonIcon, SunIcon } from '../../icons';
-import { scrollToSection, useActiveSection, useScrolled } from '../../hooks';
+import { useScrolled } from '../../hooks';
 import pfp from '../../assets/pfp/pfp-480.webp';
 import './styles/nav.css';
 
-const ids = navLinks.map((l) => l.id);
+const links = pages.filter((p) => p.label);
 
-export default function Nav({ theme, onToggleTheme }) {
+export default function Nav({ path, theme, onToggleTheme }) {
   const [open, setOpen] = useState(false);
-  const active = useActiveSection(ids);
   const scrolled = useScrolled(8);
-
-  // nav uses buttons + smooth scroll, so the url never gets a #hash
-  const go = (id) => {
-    setOpen(false);
-    scrollToSection(id);
-  };
+  const close = () => setOpen(false);
 
   return (
     <div className={`nav-wrap ${scrolled ? 'scrolled' : ''}`}>
       <nav className="top-nav" aria-label="Primary">
-        <button className="brand" type="button" onClick={() => go('top')}>
+        <Link className="brand" to="/" onClick={close}>
           <img className="brand-mark" src={pfp} alt="" width="32" height="32" />
           akiakyo
-        </button>
+        </Link>
 
         <div className={`nav-links ${open ? 'open' : ''}`}>
-          {navLinks.map((l) => (
-            <button
-              key={l.id}
-              type="button"
-              className={`nav-link ${active === l.id ? 'active' : ''}`}
-              aria-current={active === l.id ? 'true' : undefined}
-              onClick={() => go(l.id)}
+          {links.map((l) => (
+            <Link
+              key={l.path}
+              to={l.path}
+              className={`nav-link ${path === l.path ? 'active' : ''}`}
+              aria-current={path === l.path ? 'page' : undefined}
+              onClick={close}
             >
               {l.label}
-            </button>
+            </Link>
           ))}
         </div>
 

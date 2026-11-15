@@ -20,15 +20,6 @@ export const profile = {
   discord: '@akiakyo',
 };
 
-export const navLinks = [
-  { id: 'about', label: 'About' },
-  { id: 'experience', label: 'Experience' },
-  { id: 'projects', label: 'Projects' },
-  { id: 'side-projects', label: 'Side projects' },
-  { id: 'stack', label: 'Stack' },
-  { id: 'contact', label: 'Contact' },
-];
-
 export const skills = ['Frontend', 'Backend', 'Real-time systems', 'APIs', 'Databases', 'Deployment', 'UI/UX'];
 
 export const experience = [

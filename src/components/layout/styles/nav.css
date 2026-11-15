@@ -46,6 +46,8 @@
   margin-left: auto;
 }
 .nav-link {
+  display: inline-flex;
+  align-items: center;
   min-height: 40px;
   padding: 0 12px;
   border: 0;
@@ -103,6 +105,8 @@
     transform-origin: top right;
   }
   .nav-link {
+  display: inline-flex;
+  align-items: center;
     min-height: 48px;
     text-align: left;
     font-size: 16px;

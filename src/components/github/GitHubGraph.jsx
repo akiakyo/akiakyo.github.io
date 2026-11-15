@@ -46,7 +46,7 @@ export default function GitHubGraph() {
   const weeks = state.weeks || Array.from({ length: 53 }, () => new Array(7).fill({ level: 0 }));
 
   return (
-    <Section id="github" title="github" link={{ href: profile.github, label: `@${profile.handle}` }}>
+    <Section id="github" title="github" page={false} link={{ href: profile.github, label: `@${profile.handle}` }}>
       {state.status !== 'error' && (
         <div className="gh-graph">
           <svg
