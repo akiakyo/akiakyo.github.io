@@ -34,7 +34,7 @@ export const skills = ['Frontend', 'Backend', 'Real-time systems', 'APIs', 'Data
 export const experience = [
   {
     name: 'SintaChat',
-    role: 'Founder',
+    role: 'Founder, Project lead',
     logo: sinta,
     desc: 'Leading product direction and engineering for a real-time anonymous student chat platform, including matchmaking, moderation, community features, edge infrastructure, and deployment.',
     tags: ['Next.js 15', 'React 19', 'TypeScript', 'Cloudflare Workers', 'Durable Objects', 'WebSockets', 'Cloudflare D1', 'SQLite', 'Wrangler'],

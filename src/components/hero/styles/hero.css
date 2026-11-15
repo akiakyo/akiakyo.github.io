@@ -18,10 +18,16 @@
 .hero-portrait {
   aspect-ratio: 1;
 }
+/* black and white at rest, the real colors on hover (aky, 2026-11-15) */
 .hero-portrait img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  filter: grayscale(1);
+  transition: filter 0.5s ease;
+}
+.hero-portrait:hover img {
+  filter: none;
 }
 
 .hero-copy {
@@ -147,19 +153,6 @@
   font-weight: 600;
 }
 
-.stats li {
-  padding: 24px 24px 8px;
-}
-.stats li:first-child {
-  padding-left: 0;
-}
-.stats strong {
-  font-family: var(--mono);
-  font-size: 26px;
-  font-weight: 400;
-  letter-spacing: -0.03em;
-}
-
 /* faint dot pattern under the rows */
 .dot-field {
   height: 48px;
@@ -193,15 +186,61 @@
   .roles strong {
     font-size: 13px;
   }
-  .stats li {
-    padding: 20px 12px 8px;
-  }
-  .stats strong {
-    font-size: 22px;
-  }
   .hero-row small {
     font-size: 11px;
     letter-spacing: 0.03em;
   }
 }
 
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-portrait img {
+    transition: none;
+  }
+}
+
+/* overlapping round logos + bold name, like a little avatar stack */
+.logo-stack {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  vertical-align: middle;
+}
+.logo-stack strong {
+  font-weight: 500;
+  color: var(--ink);
+}
+.logo-dots {
+  display: inline-flex;
+}
+.logo-dot {
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: var(--raised);
+  box-shadow: 0 0 0 2px var(--bg), var(--shadow-sm);
+  transition: transform 0.25s cubic-bezier(0.3, 1.5, 0.5, 1);
+}
+.logo-dot + .logo-dot {
+  margin-left: -8px;
+}
+.logo-dot img {
+  width: 18px;
+  height: 18px;
+  object-fit: contain;
+}
+@media (hover: hover) {
+  .logo-stack:hover .logo-dot:first-child {
+    transform: translateX(-3px) rotate(-8deg);
+  }
+  .logo-stack:hover .logo-dot:last-child {
+    transform: translateX(3px) rotate(8deg);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .logo-dot {
+    transition: none;
+  }
+}

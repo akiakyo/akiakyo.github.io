@@ -18,7 +18,9 @@
   margin-top: 8px;
 }
 
-/* decorative 3x3 grid of soft tiles, one black in the middle */
+/* decorative 3x3 grid of soft tiles, one black in the middle.
+   tiles pop in from the center outward, the center sends out two ring pulses,
+   and each icon has its own small move on hover (aky, 2026-11-15) */
 .icon-grid {
   display: grid;
   grid-template-columns: repeat(3, 52px);
@@ -26,6 +28,7 @@
   margin-bottom: 16px;
 }
 .icon-grid .cell {
+  position: relative;
   display: grid;
   place-items: center;
   width: 52px;
@@ -33,6 +36,7 @@
   border-radius: 14px;
   background: var(--raised);
   box-shadow: var(--shadow-sm);
+  transition: transform 0.25s cubic-bezier(0.3, 1.5, 0.5, 1), box-shadow 0.25s ease;
 }
 .icon-grid .cell.blank {
   background: var(--soft);
@@ -44,9 +48,149 @@
   color: var(--on-brand);
   box-shadow: var(--shadow-tile);
 }
+.icon-grid .ic {
+  display: grid;
+}
 .icon-grid svg {
   width: 22px;
   height: 22px;
+}
+
+/* entrance, once the contact section is in view */
+.reveal .icon-grid .cell {
+  opacity: 0;
+}
+.reveal.visible .icon-grid .cell {
+  opacity: 1;
+  animation: tile-pop 0.6s cubic-bezier(0.3, 1.4, 0.5, 1) both;
+  animation-delay: calc(var(--ring) * 110ms + 250ms);
+}
+.reveal.visible .icon-grid .cell.blank {
+  opacity: 0.6;
+  animation-name: tile-pop-blank;
+}
+.reveal.visible .icon-grid .cell svg {
+  animation: icon-in 0.5s cubic-bezier(0.3, 1.6, 0.5, 1) both;
+  animation-delay: calc(var(--ring) * 110ms + 450ms);
+}
+@keyframes tile-pop {
+  from {
+    opacity: 0;
+    filter: blur(6px);
+    transform: scale(0.5);
+  }
+}
+@keyframes tile-pop-blank {
+  from {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+  to {
+    opacity: 0.6;
+  }
+}
+@keyframes icon-in {
+  from {
+    opacity: 0;
+    transform: scale(0.3) rotate(-30deg);
+  }
+}
+
+/* two ring pulses from the center tile, then it rests */
+.icon-grid .cell.tile::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  border: 2px solid var(--brand);
+  opacity: 0;
+  pointer-events: none;
+}
+.reveal.visible .icon-grid .cell.tile::after {
+  animation: ring-pulse 1.4s ease-out 0.9s 2;
+}
+@keyframes ring-pulse {
+  from {
+    opacity: 0.5;
+    transform: scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: scale(1.9);
+  }
+}
+
+/* hover: the tile lifts and its icon does its own thing */
+@media (hover: hover) {
+  .icon-grid .cell:not(.blank):hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-md);
+  }
+  .icon-grid .cell.anim-bounce:hover .ic {
+    animation: icon-bounce 0.6s ease;
+  }
+  .icon-grid .cell.anim-shake:hover .ic {
+    animation: icon-shake 0.5s ease;
+  }
+  .icon-grid .cell.anim-spin:hover .ic {
+    animation: icon-spin 0.6s cubic-bezier(0.3, 1.4, 0.5, 1);
+  }
+  .icon-grid .cell.anim-tilt:hover .ic {
+    animation: icon-tilt 0.6s ease;
+  }
+  .icon-grid .cell.anim-launch:hover .ic {
+    animation: icon-launch 0.7s cubic-bezier(0.5, 0, 0.3, 1);
+  }
+  .icon-grid .cell.blank:hover {
+    opacity: 1;
+  }
+}
+@keyframes icon-bounce {
+  30% { transform: translateY(-6px); }
+  55% { transform: translateY(0); }
+  75% { transform: translateY(-2px); }
+}
+@keyframes icon-shake {
+  20%, 60% { transform: translateX(-3px); }
+  40%, 80% { transform: translateX(3px); }
+}
+@keyframes icon-spin {
+  to { transform: rotate(180deg); }
+}
+@keyframes icon-tilt {
+  30% { transform: rotate(-14deg); }
+  60% { transform: rotate(10deg); }
+}
+@keyframes icon-launch {
+  45% { transform: translate(14px, -14px); opacity: 0; }
+  46% { transform: translate(-14px, 14px); opacity: 0; }
+  100% { transform: none; opacity: 1; }
+}
+
+/* desktop only: the rocket idles with a gentle float */
+@media (hover: hover) and (min-width: 761px) {
+  .icon-grid .cell.anim-launch:not(:hover) .ic {
+    animation: rocket-float 3s ease-in-out 2s infinite;
+  }
+}
+@keyframes rocket-float {
+  50% { transform: translate(2px, -3px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .icon-grid .cell,
+  .icon-grid .cell svg,
+  .icon-grid .cell .ic,
+  .icon-grid .cell.tile::after {
+    animation: none !important;
+    transition: none;
+  }
+  .reveal .icon-grid .cell {
+    opacity: 1;
+  }
+  .reveal .icon-grid .cell.blank {
+    opacity: 0.6;
+  }
 }
 
 /* email + discord, each with its own copy button */

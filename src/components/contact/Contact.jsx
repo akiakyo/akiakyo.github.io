@@ -34,30 +34,38 @@ function CopyRow({ label, value }) {
   );
 }
 
+// the decorative 3x3 tile grid. ring = steps from the center, so tiles pop in
+// from the middle outward; anim picks each icon's own little hover move (aky, 2026-11-15)
+const grid = [
+  { Icon: MailIcon, ring: 2, anim: 'bounce' },
+  { kind: 'blank', ring: 1 },
+  { Icon: CodeIcon, ring: 2, anim: 'shake' },
+  { kind: 'blank', ring: 1 },
+  { Icon: LinkIcon, kind: 'tile', ring: 0, anim: 'spin' },
+  { kind: 'blank', ring: 1 },
+  { Icon: GithubIcon, ring: 2, anim: 'tilt' },
+  { kind: 'blank', ring: 1 },
+  { Icon: RocketIcon, ring: 2, anim: 'launch' },
+];
+
 export default function Contact() {
   return (
     <Section id="contact" title="contact">
       <div className="card contact-card blur-in">
         <div className="icon-grid" aria-hidden="true">
-          <span className="cell">
-            <MailIcon />
-          </span>
-          <span className="cell blank" />
-          <span className="cell">
-            <CodeIcon />
-          </span>
-          <span className="cell blank" />
-          <span className="cell tile">
-            <LinkIcon />
-          </span>
-          <span className="cell blank" />
-          <span className="cell">
-            <GithubIcon />
-          </span>
-          <span className="cell blank" />
-          <span className="cell">
-            <RocketIcon />
-          </span>
+          {grid.map((cell, i) => (
+            <span
+              key={i}
+              className={`cell ${cell.kind || ''} ${cell.anim ? `anim-${cell.anim}` : ''}`}
+              style={{ '--ring': cell.ring }}
+            >
+              {cell.Icon && (
+                <span className="ic">
+                  <cell.Icon />
+                </span>
+              )}
+            </span>
+          ))}
         </div>
         <h2>Say hello</h2>
         <p className="muted">Software projects, collaborations, product work, or engineering roles — my inbox is open.</p>

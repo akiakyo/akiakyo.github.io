@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { experience, profile, projects, sideProjects } from '../../data';
+import { experience, profile } from '../../data';
 import { CheckIcon, CodeIcon, PencilIcon, RocketIcon } from '../../icons';
 import pfp480 from '../../assets/pfp/pfp-480.webp';
 import pfp960 from '../../assets/pfp/pfp-960.webp';
@@ -13,6 +13,22 @@ function Chip({ icon, logo, ink, children }) {
     <span className="chip">
       {logo ? <img src={logo} alt="" className={ink ? 'logo-ink' : undefined} /> : icon}
       {children}
+    </span>
+  );
+}
+
+// overlapping round logo badges followed by plain bold text; they fan out on hover (aky, 2026-11-15)
+function LogoStack({ logos, children }) {
+  return (
+    <span className="logo-stack">
+      <span className="logo-dots" aria-hidden="true">
+        {logos.map((l) => (
+          <span key={l.name} className="logo-dot">
+            <img src={l.logo} alt="" className={l.inkLogo ? 'logo-ink' : undefined} />
+          </span>
+        ))}
+      </span>
+      <strong>{children}</strong>
     </span>
   );
 }
@@ -41,11 +57,6 @@ function DiscordLink() {
 }
 
 const roles = [sinta, zxeno, mag];
-const stats = [
-  { value: `${projects.length + sideProjects.length}`, label: 'Projects shipped' },
-  { value: `${experience.length}`, label: 'Current roles' },
-  { value: 'UTC+8', label: 'Philippines' },
-];
 
 export default function Hero() {
   return (
@@ -61,9 +72,8 @@ export default function Hero() {
           </h1>
           <p className="bio blur-in" style={{ '--i': 2 }}>
             I'm a <Chip icon={<CodeIcon />}>software engineer</Chip> studying computer engineering at{' '}
-            <Chip logo={pup.logo}>PUP</Chip>. I founded{' '}
-            <Chip logo={sinta.logo}>SintaChat</Chip> and lead engineering at{' '}
-            <Chip logo={zxeno.logo} ink>ZXENO Studio</Chip>.
+            <Chip logo={pup.logo}>PUP</Chip>. These days I'm building{' '}
+            <LogoStack logos={[sinta, zxeno]}>SintaChat &amp; ZXENO Studio</LogoStack> as founder and CTO.
           </p>
           <p className="bio blur-in" style={{ '--i': 3 }}>
             Most of what I know comes from <Chip icon={<RocketIcon />}>shipping real projects</Chip> and{' '}
@@ -95,14 +105,6 @@ export default function Hero() {
         ))}
       </ul>
 
-      <ul className="hero-row stats">
-        {stats.map((s, i) => (
-          <li key={s.label} className="blur-in" style={{ '--i': 8 + i }}>
-            <strong>{s.value}</strong>
-            <small>{s.label}</small>
-          </li>
-        ))}
-      </ul>
 
       <div className="dot-field" aria-hidden="true" />
     </header>
