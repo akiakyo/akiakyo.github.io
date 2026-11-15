@@ -156,10 +156,11 @@ export const sideProjects = [
 ];
 
 export const stack = [
-  { title: 'Languages', items: ['C++', 'Python', 'Java', 'JavaScript', 'TypeScript'] },
+  { title: 'Languages', items: ['C++', 'Python', 'Java', 'JavaScript', 'TypeScript', 'PHP', 'Bash'] },
   { title: 'Web & frontend', items: ['Next.js', 'React', 'Vite', 'Tailwind CSS', 'HTML'] },
   { title: 'Backend & real-time', items: ['Node.js', 'Express', 'Prisma', 'Cloudflare Workers', 'Durable Objects', 'WebSockets'] },
   { title: 'Databases', items: ['MySQL', 'PostgreSQL', 'Cloudflare D1', 'SQLite'] },
-  { title: 'Tools & deployment', items: ['VS Code', 'IntelliJ IDEA', 'Git', 'GitHub', 'Vercel', 'Cloudflare', 'Wrangler'] },
+  { title: 'Tools & deployment', items: ['VS Code', 'IntelliJ IDEA', 'Git', 'GitHub', 'Vercel', 'Cloudflare', 'Wrangler', 'Google Cloud'] },
+  { title: 'Fundamentals', items: ['Data structures & algorithms'] },
   { title: 'Creative', items: ['Photoshop', 'Illustrator', 'After Effects', 'Premiere Pro', 'CapCut'] },
 ];

@@ -27,7 +27,11 @@ import Photoshop from '~icons/devicon/photoshop';
 import Illustrator from '~icons/devicon/illustrator';
 import AfterEffects from '~icons/devicon/aftereffects';
 import Premiere from '~icons/devicon/premierepro';
+import Php from '~icons/devicon/php';
+import Bash from '~icons/devicon/bash';
+import GoogleCloud from '~icons/devicon/googlecloud';
 import Cable from '~icons/lucide/cable';
+import Network from '~icons/lucide/network';
 import Scissors from '~icons/lucide/scissors';
 
 export const stackIcons = {
@@ -36,6 +40,8 @@ export const stackIcons = {
   Java: { Icon: Java },
   JavaScript: { Icon: JavaScript },
   TypeScript: { Icon: TypeScript },
+  PHP: { Icon: Php },
+  Bash: { Icon: Bash, ink: true },
   'Next.js': { Icon: NextJs, ink: true },
   React: { Icon: ReactIcon },
   Vite: { Icon: Vite },
@@ -58,6 +64,8 @@ export const stackIcons = {
   Vercel: { Icon: Vercel, ink: true },
   Cloudflare: { Icon: Cloudflare },
   Wrangler: { Icon: Cloudflare },
+  'Google Cloud': { Icon: GoogleCloud },
+  'Data structures & algorithms': { Icon: Network, ink: true },
   Photoshop: { Icon: Photoshop },
   Illustrator: { Icon: Illustrator },
   'After Effects': { Icon: AfterEffects },
