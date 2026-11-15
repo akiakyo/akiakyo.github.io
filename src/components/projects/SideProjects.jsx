@@ -48,7 +48,7 @@ function SideCard({ project }) {
 
 export default function SideProjects() {
   return (
-    <Section id="side-projects" num="04" title="Side projects" link={{ href: profile.github, label: 'All on GitHub' }}>
+    <Section id="side-projects" num="04" title="side projects" link={{ href: profile.github, label: 'All on GitHub' }}>
       <div className="side-grid">
         {sideProjects.map((p) => (
           <SideCard key={p.name} project={p} />

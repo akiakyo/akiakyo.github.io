@@ -1,0 +1,33 @@
+.gh-graph {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 8px 4px 4px;
+}
+.gh-graph svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.gh-graph circle.on {
+  fill: var(--ink);
+}
+.gh-graph circle.off {
+  fill: var(--line-strong);
+}
+.gh-graph svg.loading circle {
+  fill: var(--line);
+}
+
+.gh-total {
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+.gh-total a {
+  color: var(--ink);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}

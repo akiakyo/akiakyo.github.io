@@ -32,8 +32,6 @@
   width: 32px;
   height: 32px;
   object-fit: contain;
-  border-radius: 9px;
-  box-shadow: var(--shadow-sm), 0 0 0 1px var(--line);
 }
 .job-head h3 {
   font-size: 18px;

@@ -15,3 +15,4 @@ export { default as GithubIcon } from '~icons/lucide/github';
 export { default as CodeIcon } from '~icons/lucide/code-xml';
 export { default as RocketIcon } from '~icons/lucide/rocket';
 export { default as LinkIcon } from '~icons/lucide/link';
+export { default as PencilIcon } from '~icons/lucide/pencil-line';

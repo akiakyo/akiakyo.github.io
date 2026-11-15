@@ -1,3 +1,4 @@
+/* quiet "02 — projects" labels with a small uppercase mono link on the right */
 .section-head {
   display: flex;
   flex-wrap: wrap;
@@ -5,24 +6,32 @@
   justify-content: space-between;
   gap: 4px 16px;
   min-height: 44px;
-  padding: 0 4px 16px;
+  padding: 0 4px 12px;
 }
 .section-head h2 {
   display: flex;
   align-items: baseline;
-  gap: 10px;
-  font-size: 22px;
+  gap: 8px;
+  font-size: 17px;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  color: var(--ink-3);
 }
 .section-num {
   font-family: var(--mono);
-  font-size: 14px;
-  font-weight: 400;
+  font-size: 15px;
   letter-spacing: 0;
-  color: var(--ink-3);
 }
 .section-head .text-link {
-  font-size: 14px;
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
   color: var(--ink-2);
+}
+.section-head .text-link svg {
+  width: 13px;
+  height: 13px;
 }
 .section-head .text-link:hover {
   color: var(--ink);

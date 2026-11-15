@@ -5,7 +5,7 @@ import './styles/about.css';
 
 export default function About() {
   return (
-    <Section id="about" num="01" title="About">
+    <Section id="about" num="01" title="about">
       <div className="about-grid">
         <div className="card about-text">
           <h3>Turning ideas into products people use</h3>

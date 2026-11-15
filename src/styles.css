@@ -25,7 +25,7 @@
   --radius-sm: 12px;
 
   --font: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
-  --mono: ui-monospace, 'SFMono-Regular', Consolas, monospace;
+  --mono: 'JetBrains Mono', ui-monospace, 'SFMono-Regular', Consolas, monospace;
 }
 
 html[data-theme='dark'] {
@@ -294,6 +294,11 @@ html[data-theme='dark'] .card {
 .meta-list li:not(:last-child)::after {
   content: '·';
   margin: 0 8px;
+}
+
+/* black-on-clear logos turn white on the dark theme so they stay visible */
+html[data-theme='dark'] .logo-ink {
+  filter: invert(1);
 }
 
 /* ---------- footer ---------- */

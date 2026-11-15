@@ -8,6 +8,7 @@ import Experience from './components/experience/Experience';
 import Projects from './components/projects/Projects';
 import SideProjects from './components/projects/SideProjects';
 import Contact from './components/contact/Contact';
+import GitHubGraph from './components/github/GitHubGraph';
 
 export default function App() {
   const [theme, toggleTheme] = useTheme();
@@ -23,6 +24,7 @@ export default function App() {
         <Projects />
         <SideProjects />
         <Stack />
+        <GitHubGraph />
         <Contact />
         <footer className="footer">
           <span>

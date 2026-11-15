@@ -35,17 +35,9 @@
   cursor: pointer;
 }
 .brand-mark {
-  display: grid;
-  place-items: end center;
   width: 32px;
   height: 32px;
-  overflow: hidden;
-  border-radius: 9px;
-  background: var(--brand);
-  box-shadow: var(--shadow-tile);
-}
-.brand-mark .avatar {
-  width: 30px;
+  object-fit: contain;
 }
 
 .nav-links {

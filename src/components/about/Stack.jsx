@@ -4,7 +4,7 @@ import './styles/about.css';
 
 export default function Stack() {
   return (
-    <Section id="stack" num="05" title="Stack">
+    <Section id="stack" num="05" title="stack">
       <div className="card stack-card">
         {stack.map((group) => (
           <div key={group.title} className="stack-row">

@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { navLinks } from '../../data';
 import { CloseIcon, MenuIcon, MoonIcon, SunIcon } from '../../icons';
 import { scrollToSection, useActiveSection, useScrolled } from '../../hooks';
-import Avatar from '../hero/Avatar';
+import pfp from '../../assets/pfp/pfp-480.webp';
 import './styles/nav.css';
 
 const ids = navLinks.map((l) => l.id);
@@ -22,9 +22,7 @@ export default function Nav({ theme, onToggleTheme }) {
     <div className={`nav-wrap ${scrolled ? 'scrolled' : ''}`}>
       <nav className="top-nav" aria-label="Primary">
         <button className="brand" type="button" onClick={() => go('top')}>
-          <span className="brand-mark" aria-hidden="true">
-            <Avatar />
-          </span>
+          <img className="brand-mark" src={pfp} alt="" width="32" height="32" />
           akiakyo
         </button>
 
