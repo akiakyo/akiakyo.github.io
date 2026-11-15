@@ -30,7 +30,6 @@ export default function App() {
           <span>
             © {new Date().getFullYear()} {profile.name}
           </span>
-          <span>Built with React and Vite</span>
         </footer>
       </main>
     </>

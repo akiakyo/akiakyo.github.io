@@ -51,23 +51,25 @@ export default function Hero() {
   return (
     <header className="hero reveal" id="top">
       <div className="hero-main">
-        <div className="hero-portrait">
+        <div className="hero-portrait blur-in" style={{ '--i': 0 }}>
           <img src={pfp480} srcSet={`${pfp480} 480w, ${pfp960} 960w`} sizes="(max-width: 760px) 168px, 300px" width="480" height="480" alt={`Illustrated portrait of ${profile.name}`} />
         </div>
 
         <div className="hero-copy">
-          <h1>{profile.name}</h1>
-          <p className="bio">
+          <h1 className="blur-in" style={{ '--i': 1 }}>
+            {profile.name}
+          </h1>
+          <p className="bio blur-in" style={{ '--i': 2 }}>
             I'm a <Chip icon={<CodeIcon />}>software engineer</Chip> studying computer engineering at{' '}
             <Chip logo={pup.logo}>PUP</Chip>. I founded{' '}
-            <Chip logo={sinta.logo}>Sintachat</Chip> and lead engineering at{' '}
-            <Chip logo={zxeno.logo} ink>Zxeno Studio</Chip>.
+            <Chip logo={sinta.logo}>SintaChat</Chip> and lead engineering at{' '}
+            <Chip logo={zxeno.logo} ink>ZXENO Studio</Chip>.
           </p>
-          <p className="bio">
+          <p className="bio blur-in" style={{ '--i': 3 }}>
             Most of what I know comes from <Chip icon={<RocketIcon />}>shipping real projects</Chip> and{' '}
             <Chip icon={<PencilIcon />}>fixing what breaks</Chip> as they grow.
           </p>
-          <div className="mono-links">
+          <div className="mono-links blur-in" style={{ '--i': 4 }}>
             <a className="mono-link" href={profile.github} target="_blank" rel="noopener noreferrer">
               github <span aria-hidden="true">↗</span>
             </a>
@@ -80,8 +82,8 @@ export default function Hero() {
       </div>
 
       <ul className="hero-row roles">
-        {roles.map((job) => (
-          <li key={job.name}>
+        {roles.map((job, i) => (
+          <li key={job.name} className="blur-in" style={{ '--i': 5 + i }}>
             <a href={job.link.href} target="_blank" rel="noopener noreferrer">
               <img src={job.logo} alt="" className={job.inkLogo ? 'logo-ink' : undefined} />
               <span>
@@ -94,8 +96,8 @@ export default function Hero() {
       </ul>
 
       <ul className="hero-row stats">
-        {stats.map((s) => (
-          <li key={s.label}>
+        {stats.map((s, i) => (
+          <li key={s.label} className="blur-in" style={{ '--i': 8 + i }}>
             <strong>{s.value}</strong>
             <small>{s.label}</small>
           </li>

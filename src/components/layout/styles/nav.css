@@ -99,10 +99,25 @@
   }
   .nav-links.open {
     display: flex;
+    animation: menu-pop 0.28s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+    transform-origin: top right;
   }
   .nav-link {
     min-height: 48px;
     text-align: left;
     font-size: 16px;
+  }
+}
+
+@keyframes menu-pop {
+  from {
+    opacity: 0;
+    transform: translateY(-8px) scale(0.97);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nav-links.open {
+    animation: none;
   }
 }

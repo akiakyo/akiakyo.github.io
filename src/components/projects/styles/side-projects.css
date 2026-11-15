@@ -1,12 +1,32 @@
-.side-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
+/* a sideways row that snaps to each card; the right edge fades to hint there's more */
+.side-track {
+  display: flex;
   gap: 16px;
+  margin: 0 -4px;
+  padding: 4px 4px 8px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-padding: 0 4px;
+  scrollbar-width: none;
+  overscroll-behavior-x: contain;
+  -webkit-mask-image: linear-gradient(90deg, #000 85%, transparent);
+  mask-image: linear-gradient(90deg, #000 85%, transparent);
+  cursor: grab;
+}
+.side-track::-webkit-scrollbar {
+  display: none;
+}
+.side-track.dragging {
+  scroll-snap-type: none;
+  cursor: grabbing;
+  user-select: none;
 }
 
 .side-card {
+  flex: 0 0 min(400px, 84%);
   display: flex;
   flex-direction: column;
+  scroll-snap-align: start;
 }
 .side-copy {
   display: flex;
@@ -17,6 +37,13 @@
 }
 .side-copy p {
   font-size: 15px;
+}
+
+.side-controls {
+  display: flex;
+  justify-content: flex-end;
+  gap: 4px;
+  padding-top: 8px;
 }
 
 /* the screenshot sits in a little browser frame, cut off by the card's bottom edge */
@@ -79,14 +106,13 @@
   font-size: 13px;
 }
 
-@media (max-width: 960px) {
-  .side-grid {
-    grid-template-columns: 1fr;
-  }
-}
-
 @media (prefers-reduced-motion: reduce) {
   .browser {
     transition: none;
   }
+}
+
+.side-track.at-end {
+  -webkit-mask-image: none;
+  mask-image: none;
 }

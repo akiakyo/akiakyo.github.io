@@ -1,19 +1,28 @@
-import { useEffect, useRef } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { CloseIcon, NextIcon, PrevIcon } from '../../icons';
 import './styles/lightbox.css';
 
 const wrap = (i, n) => (i + n) % n;
+const CLOSE_MS = 220;
 
 export default function Lightbox({ project, index, onIndex, onClose }) {
   const shots = project.shots;
   const closeRef = useRef(null);
+  const [closing, setClosing] = useState(false);
   const prev = () => onIndex(wrap(index - 1, shots.length));
   const next = () => onIndex(wrap(index + 1, shots.length));
 
+  // play the exit animation first, then unmount
+  const close = useCallback(() => {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return onClose();
+    setClosing(true);
+    setTimeout(onClose, CLOSE_MS);
+  }, [onClose]);
+
   useEffect(() => {
     const onKey = (e) => {
-      if (e.key === 'Escape') onClose();
+      if (e.key === 'Escape') close();
       if (e.key === 'ArrowLeft') prev();
       if (e.key === 'ArrowRight') next();
     };
@@ -34,17 +43,24 @@ export default function Lightbox({ project, index, onIndex, onClose }) {
 
   // portal to body: the section's reveal transform would otherwise trap position: fixed
   return createPortal(
-    <div className="lightbox" role="dialog" aria-modal="true" aria-label={`${project.name} screenshots`} onClick={onClose}>
+    <div
+      className={`lightbox ${closing ? 'closing' : ''}`}
+      role="dialog"
+      aria-modal="true"
+      aria-label={`${project.name} screenshots`}
+      onClick={close}
+    >
       <figure className="lightbox-frame" onClick={(e) => e.stopPropagation()}>
         <div className="lightbox-bar">
           <span className="muted">
             {index + 1} / {shots.length}
           </span>
-          <button ref={closeRef} className="icon-btn" type="button" aria-label="Close" onClick={onClose}>
+          <button ref={closeRef} className="icon-btn" type="button" aria-label="Close" onClick={close}>
             <CloseIcon />
           </button>
         </div>
-        <img src={shots[index].src} alt={shots[index].caption} />
+        {/* keyed by index so each new shot replays the soft fade */}
+        <img key={index} className="lightbox-shot" src={shots[index].src} alt={shots[index].caption} />
         <figcaption>
           <button className="icon-btn" type="button" aria-label="Previous screenshot" onClick={prev}>
             <PrevIcon />

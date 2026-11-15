@@ -6,10 +6,10 @@ import './styles/experience.css';
 // a plain list: role on the left, company and details on the right
 export default function Experience() {
   return (
-    <Section id="experience" num="02" title="experience">
+    <Section id="experience" title="experience">
       <ol className="card job-list">
-        {experience.map((job) => (
-          <li key={job.name} className="job">
+        {experience.map((job, i) => (
+          <li key={job.name} className="job blur-in" style={{ '--i': i }}>
             <p className="job-role muted">{job.role}</p>
             <div className="job-body">
               <div className="job-head">

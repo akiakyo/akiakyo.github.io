@@ -33,7 +33,7 @@ export const skills = ['Frontend', 'Backend', 'Real-time systems', 'APIs', 'Data
 
 export const experience = [
   {
-    name: 'Sintachat',
+    name: 'SintaChat',
     role: 'Founder',
     logo: sinta,
     desc: 'Leading product direction and engineering for a real-time anonymous student chat platform, including matchmaking, moderation, community features, edge infrastructure, and deployment.',
@@ -41,7 +41,7 @@ export const experience = [
     link: { href: 'https://sintachat.com', label: 'sintachat.com' },
   },
   {
-    name: 'Zxeno Studio',
+    name: 'ZXENO Studio',
     role: 'CTO · Software engineer',
     logo: zxeno,
     inkLogo: true, // solid black mark, flipped to white in dark mode
@@ -69,7 +69,7 @@ export const experience = [
 
 export const projects = [
   {
-    name: 'Sintachat',
+    name: 'SintaChat',
     kicker: 'Real-time student platform',
     logo: sinta,
     desc: 'Anonymous chat for students in the Philippines, built around real-time matching, safety, moderation, and edge-first infrastructure.',
@@ -78,7 +78,7 @@ export const projects = [
     label: 'sintachat.com',
   },
   {
-    name: 'Zxeno Studio',
+    name: 'ZXENO Studio',
     kicker: 'Creative + technology studio',
     logo: zxeno,
     inkLogo: true, // solid black mark, flipped to white in dark mode

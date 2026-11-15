@@ -29,7 +29,7 @@ export default function Projects() {
   };
 
   return (
-    <Section id="projects" num="03" title="projects" link={{ href: profile.github, label: 'All on GitHub' }}>
+    <Section id="projects" title="projects" link={{ href: profile.github, label: 'All on GitHub' }}>
       <div className="fan" onTouchStart={onTouchStart} onTouchEnd={onTouchEnd}>
         {projects.map((p, i) => {
           const rel = slot(i, active, n);

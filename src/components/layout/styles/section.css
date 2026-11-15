@@ -1,4 +1,4 @@
-/* quiet "02 — projects" labels with a small uppercase mono link on the right */
+/* quiet lowercase labels with a small uppercase mono link on the right */
 .section-head {
   display: flex;
   flex-wrap: wrap;
@@ -16,11 +16,6 @@
   font-weight: 400;
   letter-spacing: -0.01em;
   color: var(--ink-3);
-}
-.section-num {
-  font-family: var(--mono);
-  font-size: 15px;
-  letter-spacing: 0;
 }
 .section-head .text-link {
   font-family: var(--mono);

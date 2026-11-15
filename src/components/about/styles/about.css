@@ -51,19 +51,47 @@
   letter-spacing: 0;
 }
 
-/* tech names as small soft chips */
-.chips {
+/* tech chips with their logos: gray at rest, full color and a small lift on hover (aky, 2026-11-15) */
+.tech-chips {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
 }
-.chips li {
-  padding: 5px 12px;
-  border-radius: 8px;
+.tech-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 12px 6px 8px;
+  border-radius: 10px;
   background: var(--raised);
   box-shadow: var(--shadow-sm);
   font-size: 14px;
   font-weight: 500;
+  transition: transform 0.2s cubic-bezier(0.2, 0.7, 0.2, 1), box-shadow 0.2s ease;
+}
+.tech-icon {
+  width: 18px;
+  height: 18px;
+  filter: grayscale(1);
+  opacity: 0.85;
+  transition: filter 0.2s ease, opacity 0.2s ease, transform 0.3s cubic-bezier(0.3, 1.6, 0.5, 1);
+}
+html[data-theme='dark'] .tech-icon.ink {
+  filter: grayscale(1) invert(1);
+}
+@media (hover: hover) {
+  .tech-chip:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-md);
+  }
+  .tech-chip:hover .tech-icon {
+    filter: none;
+    opacity: 1;
+    transform: rotate(-8deg) scale(1.15);
+  }
+  html[data-theme='dark'] .tech-chip:hover .tech-icon.ink {
+    filter: invert(1);
+  }
 }
 
 @media (max-width: 860px) {
@@ -82,5 +110,12 @@
   }
   .stack-row h3 {
     padding-top: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tech-chip,
+  .tech-icon {
+    transition: none;
   }
 }

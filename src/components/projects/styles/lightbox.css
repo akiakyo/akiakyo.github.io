@@ -6,6 +6,7 @@
   place-items: center;
   padding: 16px;
   background: rgba(10, 10, 10, 0.72);
+  animation: lb-backdrop-in 0.25s ease both;
 }
 .lightbox-frame {
   display: flex;
@@ -17,7 +18,42 @@
   background: var(--raised);
   border-radius: var(--radius-card);
   box-shadow: var(--shadow-md);
+  animation: lb-pop-in 0.38s cubic-bezier(0.2, 0.8, 0.2, 1) both;
 }
+
+/* closing plays the same moves backward, a little faster */
+.lightbox.closing {
+  animation: lb-backdrop-out 0.22s ease both;
+}
+.lightbox.closing .lightbox-frame {
+  animation: lb-pop-out 0.22s ease both;
+}
+
+@keyframes lb-backdrop-in {
+  from {
+    opacity: 0;
+  }
+}
+@keyframes lb-backdrop-out {
+  to {
+    opacity: 0;
+  }
+}
+@keyframes lb-pop-in {
+  from {
+    opacity: 0;
+    filter: blur(8px);
+    transform: translateY(16px) scale(0.94);
+  }
+}
+@keyframes lb-pop-out {
+  to {
+    opacity: 0;
+    filter: blur(6px);
+    transform: translateY(8px) scale(0.96);
+  }
+}
+
 .lightbox-bar {
   display: flex;
   align-items: center;
@@ -25,11 +61,18 @@
   padding: 4px 4px 4px 20px;
   font-size: 14px;
 }
-.lightbox-frame img {
+.lightbox-shot {
   min-height: 0;
   width: 100%;
   object-fit: contain;
   background: var(--card);
+  animation: lb-shot-in 0.3s ease both;
+}
+@keyframes lb-shot-in {
+  from {
+    opacity: 0;
+    filter: blur(4px);
+  }
 }
 .lightbox-frame figcaption {
   display: flex;
@@ -39,4 +82,22 @@
   padding: 4px;
   font-size: 15px;
   text-align: center;
+}
+
+/* phones: skip the blur, keep the scale and fade */
+@media (max-width: 640px) {
+  @keyframes lb-pop-in {
+    from {
+      opacity: 0;
+      transform: translateY(24px) scale(0.96);
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lightbox,
+  .lightbox-frame,
+  .lightbox-shot {
+    animation: none;
+  }
 }

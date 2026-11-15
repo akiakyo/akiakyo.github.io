@@ -36,8 +36,8 @@ function CopyRow({ label, value }) {
 
 export default function Contact() {
   return (
-    <Section id="contact" num="07" title="contact">
-      <div className="card contact-card">
+    <Section id="contact" title="contact">
+      <div className="card contact-card blur-in">
         <div className="icon-grid" aria-hidden="true">
           <span className="cell">
             <MailIcon />
