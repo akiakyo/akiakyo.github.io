@@ -61,7 +61,8 @@ export function useReveal() {
           e.target.classList.add('visible');
           observer.unobserve(e.target);
         }),
-      { threshold: 0.08, rootMargin: '0px 0px -40px' }
+      // threshold 0: a section taller than the screen (the side projects) could never reach a percentage
+      { threshold: 0, rootMargin: '0px 0px -12% 0px' }
     );
     items.forEach((el) => observer.observe(el));
     return () => observer.disconnect();
