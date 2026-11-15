@@ -199,7 +199,7 @@
   }
 }
 
-/* overlapping round logos + bold name, like a little avatar stack */
+/* overlapping logos + bold name, like a little avatar stack */
 .logo-stack {
   display: inline-flex;
   align-items: center;
@@ -213,22 +213,20 @@
 .logo-dots {
   display: inline-flex;
 }
+/* logos sit on nothing: no circle, ring or shadow behind them (aky, 2026-11-15) */
 .logo-dot {
   display: grid;
   place-items: center;
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-  background: var(--raised);
-  box-shadow: 0 0 0 2px var(--bg), var(--shadow-sm);
+  width: 24px;
+  height: 24px;
   transition: transform 0.25s cubic-bezier(0.3, 1.5, 0.5, 1);
 }
 .logo-dot + .logo-dot {
-  margin-left: -8px;
+  margin-left: -4px;
 }
 .logo-dot img {
-  width: 18px;
-  height: 18px;
+  width: 22px;
+  height: 22px;
   object-fit: contain;
 }
 @media (hover: hover) {
