@@ -1,0 +1,85 @@
+.project-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.project {
+  display: flex;
+  flex-direction: column;
+  padding: 28px 24px 20px;
+}
+.project-copy {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.project-copy p {
+  font-size: 15px;
+}
+
+.project-visual {
+  position: relative;
+  flex: 1;
+  min-height: 200px;
+  margin: 8px -24px 0;
+}
+.rings.small {
+  background: radial-gradient(circle at 50% 50%, transparent 0 56px, var(--line) 57px 58px, transparent 59px 104px, var(--line) 105px 106px, transparent 107px);
+}
+.project-logo {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 76px;
+  height: 76px;
+  object-fit: contain;
+  border-radius: 20px;
+  box-shadow: var(--shadow-md);
+  transform: translate(-50%, -50%);
+  transition: transform 0.25s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.project:hover .project-logo {
+  transform: translate(-50%, -54%);
+}
+.project-visual .float {
+  position: absolute;
+  font-size: 13px;
+}
+.pf-a {
+  top: 28px;
+  left: 20px;
+}
+.pf-b {
+  bottom: 28px;
+  right: 20px;
+}
+
+.project-foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  font-size: 14px;
+}
+.project-tile {
+  width: 40px;
+  height: 40px;
+  transition: transform 0.2s ease;
+}
+.project:hover .project-tile {
+  transform: translate(2px, -2px);
+}
+
+@media (max-width: 960px) {
+  .project-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .project-logo,
+  .project-tile {
+    transition: none;
+  }
+}

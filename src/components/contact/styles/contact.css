@@ -1,0 +1,98 @@
+.contact-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  padding: 48px 24px;
+  text-align: center;
+}
+.contact-card h2 {
+  font-size: clamp(28px, 4vw, 40px);
+  letter-spacing: -0.035em;
+}
+.contact-card p {
+  max-width: 52ch;
+}
+.contact-card .actions {
+  justify-content: center;
+  margin-top: 8px;
+}
+
+/* decorative 3x3 grid of soft tiles, one black in the middle */
+.icon-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 52px);
+  gap: 10px;
+  margin-bottom: 16px;
+}
+.icon-grid .cell {
+  display: grid;
+  place-items: center;
+  width: 52px;
+  height: 52px;
+  border-radius: 14px;
+  background: var(--raised);
+  box-shadow: var(--shadow-sm);
+}
+.icon-grid .cell.blank {
+  background: var(--soft);
+  box-shadow: none;
+  opacity: 0.6;
+}
+.icon-grid .cell.tile {
+  background: var(--brand);
+  color: var(--on-brand);
+  box-shadow: var(--shadow-tile);
+}
+.icon-grid svg {
+  width: 22px;
+  height: 22px;
+}
+
+/* email + discord, each with its own copy button */
+.copy-list {
+  display: flex;
+  flex-direction: column;
+  width: min(480px, 100%);
+  margin-top: 8px;
+  padding: 4px 4px 4px 16px;
+  background: var(--raised);
+  border-radius: 16px;
+  box-shadow: var(--shadow-sm);
+  text-align: left;
+}
+.copy-row {
+  display: grid;
+  grid-template-columns: 64px 1fr auto;
+  align-items: center;
+  gap: 12px;
+  min-height: 52px;
+}
+.copy-row + .copy-row {
+  border-top: 1px solid var(--line);
+}
+.copy-label {
+  font-size: 13px;
+}
+.copy-value {
+  min-width: 0;
+  overflow-wrap: anywhere;
+  font-size: 15px;
+  font-weight: 500;
+}
+.copy-btn {
+  min-width: 96px;
+  padding: 0 14px;
+  font-size: 14px;
+}
+
+@media (max-width: 420px) {
+  .copy-row {
+    grid-template-columns: 1fr auto;
+    gap: 2px 12px;
+    padding: 8px 0;
+  }
+  .copy-label {
+    grid-column: 1 / -1;
+  }
+}

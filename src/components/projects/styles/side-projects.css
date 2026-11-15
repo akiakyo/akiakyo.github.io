@@ -1,0 +1,92 @@
+.side-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.side-card {
+  display: flex;
+  flex-direction: column;
+}
+.side-copy {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 28px 24px 4px;
+}
+.side-copy p {
+  font-size: 15px;
+}
+
+/* the screenshot sits in a little browser frame, cut off by the card's bottom edge */
+.side-visual {
+  position: relative;
+  display: block;
+  margin-top: auto;
+  padding: 24px 24px 0;
+  border: 0;
+  background: none;
+  text-align: left;
+  cursor: zoom-in;
+}
+.side-visual:focus-visible {
+  outline-offset: -4px;
+  border-radius: var(--radius-card);
+}
+.browser {
+  display: block;
+  overflow: hidden;
+  border-radius: 14px 14px 0 0;
+  background: var(--raised);
+  box-shadow: var(--shadow-md);
+  transition: transform 0.25s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.side-visual:hover .browser {
+  transform: translateY(-4px);
+}
+.browser-bar {
+  display: flex;
+  gap: 6px;
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--line);
+}
+.browser-bar i {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--line-strong);
+}
+.browser img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  object-position: top;
+}
+.side-tile {
+  position: absolute;
+  top: 8px;
+  right: 12px;
+  width: 40px;
+  height: 40px;
+}
+.side-count {
+  position: absolute;
+  bottom: 20px;
+  left: 12px;
+  padding: 8px 12px;
+  font-size: 13px;
+}
+
+@media (max-width: 960px) {
+  .side-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .browser {
+    transition: none;
+  }
+}

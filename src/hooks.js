@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import { sfx } from './sfx';
 
 const THEME_KEY = 'aquio-theme';
 
@@ -47,11 +46,10 @@ export function useActiveSection(ids) {
   return active;
 }
 
-// adds .visible to every .reveal / .pop-in element once it scrolls into view,
-// and plays typing blips when that brings typed text with it
+// adds .visible to every .reveal element once it scrolls into view
 export function useReveal() {
   useEffect(() => {
-    const items = document.querySelectorAll('.reveal, .pop-in');
+    const items = document.querySelectorAll('.reveal');
     if (!('IntersectionObserver' in window)) {
       items.forEach((el) => el.classList.add('visible'));
       return;
@@ -62,9 +60,8 @@ export function useReveal() {
           if (!e.isIntersecting) return;
           e.target.classList.add('visible');
           observer.unobserve(e.target);
-          if (e.target.classList.contains('reveal') && e.target.querySelector('.tw')) sfx.typing(1.1);
         }),
-      { threshold: 0.1, rootMargin: '0px 0px -30px' }
+      { threshold: 0.08, rootMargin: '0px 0px -40px' }
     );
     items.forEach((el) => observer.observe(el));
     return () => observer.disconnect();
@@ -82,41 +79,4 @@ export function useScrolled(offset = 80) {
   }, [offset]);
 
   return scrolled;
-}
-
-export function useSfxEnabled() {
-  const [on, setOn] = useState(sfx.isEnabled);
-  useEffect(() => sfx.subscribe(setOn), []);
-  return on;
-}
-
-// site-wide sounds: soft blip on hover, select beep on click.
-// elements can opt into another sound with data-sfx="flip", or out with data-sfx="none".
-export function useSfx() {
-  useEffect(() => {
-    const canHover = window.matchMedia('(hover: hover)').matches;
-    let lastTarget = null;
-
-    const onOver = (e) => {
-      const el = e.target.closest('a, button');
-      if (el === lastTarget) return;
-      lastTarget = el;
-      if (el && canHover && el.closest('[data-sfx]')?.dataset.sfx !== 'none') sfx.hover();
-    };
-    const onClick = (e) => {
-      const el = e.target.closest('a, button');
-      if (!el) return;
-      const kind = el.closest('[data-sfx]')?.dataset.sfx;
-      if (kind === 'none') return;
-      if (kind === 'flip') sfx.flip();
-      else sfx.tap();
-    };
-
-    document.addEventListener('pointerover', onOver);
-    document.addEventListener('click', onClick);
-    return () => {
-      document.removeEventListener('pointerover', onOver);
-      document.removeEventListener('click', onClick);
-    };
-  }, []);
 }

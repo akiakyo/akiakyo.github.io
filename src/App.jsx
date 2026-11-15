@@ -1,23 +1,22 @@
 import { profile } from './data';
-import { useReveal, useSfx, useTheme } from './hooks';
-import Nav from './components/Nav';
-import Hero from './components/Hero';
-import About from './components/About';
-import Experience from './components/Experience';
-import Projects from './components/Projects';
-import SideProjects from './components/SideProjects';
-import Stack from './components/Stack';
-import Contact from './components/Contact';
+import { useReveal, useTheme } from './hooks';
+import Nav from './components/layout/Nav';
+import Hero from './components/hero/Hero';
+import About from './components/about/About';
+import Stack from './components/about/Stack';
+import Experience from './components/experience/Experience';
+import Projects from './components/projects/Projects';
+import SideProjects from './components/projects/SideProjects';
+import Contact from './components/contact/Contact';
 
 export default function App() {
   const [theme, toggleTheme] = useTheme();
   useReveal();
-  useSfx();
 
   return (
     <>
       <Nav theme={theme} onToggleTheme={toggleTheme} />
-      <main className="page" id="top">
+      <main className="page">
         <Hero />
         <About />
         <Experience />
@@ -29,7 +28,7 @@ export default function App() {
           <span>
             © {new Date().getFullYear()} {profile.name}
           </span>
-          <span>built with react · vite · placed pixel by pixel</span>
+          <span>Built with React and Vite</span>
         </footer>
       </main>
     </>

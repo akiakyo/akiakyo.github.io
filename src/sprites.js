@@ -155,22 +155,3 @@ export const avatarEyes = [
   '..........KK........KK..........',
   '..........KK........KK..........',
 ];
-
-export const sparkle = [
-  '...K...',
-  '...K...',
-  '..KKK..',
-  'KKKKKKK',
-  '..KKK..',
-  '...K...',
-  '...K...',
-];
-
-export const heart = [
-  '.KK.KK.',
-  'KKKKKKK',
-  'KKKKKKK',
-  '.KKKKK.',
-  '..KKK..',
-  '...K...',
-];

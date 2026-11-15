@@ -1,0 +1,29 @@
+.section-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 4px 16px;
+  min-height: 44px;
+  padding: 0 4px 16px;
+}
+.section-head h2 {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  font-size: 22px;
+}
+.section-num {
+  font-family: var(--mono);
+  font-size: 14px;
+  font-weight: 400;
+  letter-spacing: 0;
+  color: var(--ink-3);
+}
+.section-head .text-link {
+  font-size: 14px;
+  color: var(--ink-2);
+}
+.section-head .text-link:hover {
+  color: var(--ink);
+}
