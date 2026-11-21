@@ -39,7 +39,7 @@ export const pages = [
     label: 'Side projects',
     title: 'Side projects — Aquio Fulgencio',
     intro: 'Things I built for fun & friends. Scroll to flip through each one.',
-    description: 'Yrah, ken.visuals and Akademy: side projects by Aquio Fulgencio.',
+    description: 'akyDownloader, Yrah, ken.visuals and Akademy: side projects by Aquio Fulgencio.',
   },
   {
     path: '/stack',

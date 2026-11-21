@@ -91,6 +91,24 @@ export const projects = [
 
 export const sideProjects = [
   {
+    name: 'akyDownloader',
+    kicker: 'Free video downloader',
+    shots: gallery('akydownloader', [
+      'Home — paste a link, get an MP3 or MP4',
+      'Platforms, how it works and specs',
+      'A page for every platform',
+      'Dark mode, three steps from link to file',
+      'Questions answered on every page',
+      'YouTube to MP3 and MP4, in dark mode',
+      'Tips for finding the link in each app',
+      'Privacy: no accounts, no tracking',
+      'Built for phones first, light and dark',
+    ]),
+    desc: 'Turn TikTok, YouTube, Facebook and Instagram links into MP3 and MP4 files. Free, no sign-up, no tracking, and open source. Built with Next.js and FastAPI.',
+    href: 'https://github.com/akiakyo/akydownloader',
+    label: 'github.com/akiakyo/akydownloader',
+  },
+  {
     name: 'Yrah',
     kicker: 'Free flashcard maker',
     shots: gallery('yrah', [

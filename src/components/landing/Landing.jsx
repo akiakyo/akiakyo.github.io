@@ -33,7 +33,7 @@ function Card({ to, i, span, title, text, className = '', children }) {
 }
 
 export default function Landing() {
-  const yrah = sideProjects[0];
+  const firstSide = sideProjects[0];
 
   return (
     <>
@@ -86,7 +86,7 @@ export default function Landing() {
                 <i />
                 <i />
               </span>
-              <img src={yrah.shots[0].src} alt="" loading="lazy" />
+              <img src={firstSide.shots[0].src} alt="" loading="lazy" />
             </span>
           </Card>
 
